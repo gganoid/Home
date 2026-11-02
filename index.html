@@ -196,6 +196,7 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 
 
 /* navigation + Our Location */
+.uc{margin-inline:-16px;background:#c0350a;color:#fff;text-align:center;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:9px 16px;line-height:1.3}
 .announce{margin-inline:-16px;position:relative;background:var(--ink);color:var(--bg);font-size:13px;height:40px;overflow:hidden}
 .an-track{position:absolute;inset:0;overflow:hidden}
 .an-track p{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;transition:transform 1.1s cubic-bezier(.65,0,.35,1),opacity 1.1s ease;white-space:nowrap;will-change:transform,opacity}
@@ -208,6 +209,21 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 .top a,.top .tl{font:inherit;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;background:none;border:0;padding:6px 0;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
 .top a:hover,.top .tl:hover{border-bottom-color:var(--line)}
 .top [aria-current="page"]{border-bottom-color:var(--ink)}
+.dd{position:relative}
+.ddm{position:absolute;left:-12px;top:100%;min-width:170px;padding:8px 12px 10px;background:var(--surface);border:1px solid var(--line);border-top:0;box-shadow:0 8px 20px rgba(0,0,0,.08);display:none;flex-direction:column;gap:2px;z-index:7}
+.dd:hover .ddm,.dd:focus-within .ddm{display:flex}
+.dd.shut .ddm{display:none!important}
+.burger{display:none!important}
+@media (max-width:720px){
+  .burger{display:inline-flex!important;align-items:center;padding:4px 0!important}
+  #navKat{display:none}
+  .dd:hover .ddm,.dd:focus-within .ddm{display:none}
+  .dd.open .ddm{display:flex!important}
+  .ddm{left:0;min-width:200px;padding:6px 16px 10px;border-left:0}
+  .ddm a{font-size:13px}
+}
+.ddm a{padding:8px 0;border-bottom:0!important;font-size:12.5px}
+.ddm a:hover,.ddm a[aria-current="page"]{text-decoration:underline;text-underline-offset:4px}
 .brand{display:block;text-align:center;font-family:var(--display);font-weight:700;font-size:36px;letter-spacing:.26em;padding:20px 0 0 .26em;line-height:1;color:var(--ink);text-decoration:none}
 @media (max-width:720px){.top{grid-template-columns:1fr auto;padding-block:6px 10px}.brand{font-size:28px;padding:14px 0 0 .26em}.nl,.nr{gap:12px}.top a,.top .tl{font-size:11px;letter-spacing:.03em}}
 .intro{padding-block:26px 12px}.loc-hero{padding-block:26px 12px}
@@ -315,6 +331,7 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 @media (max-width:720px){.stats{display:grid;grid-template-columns:repeat(3,1fr)}.stat{min-width:0;padding:10px 12px}.stat b{font-size:30px}.stat span{font-size:10px;letter-spacing:.06em}}
 </style>
 
+<div class="uc" role="status">This Website is Under Construction</div>
 <div class="announce" id="announce" role="region" aria-roledescription="carousel" aria-label="Pengumuman">
   <div class="an-track" id="annTrack">
     <p>Diskon 10% untuk semua kaos</p>
@@ -326,14 +343,14 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 <div class="wrap">
   <a class="brand" href="#katalog" id="navLogo" aria-label="G-GANO, ke katalog">G-GANO</a>
   <header class="top">
-    <nav class="nl nav-main" aria-label="Menu utama"><a href="#katalog" id="navKat" aria-current="page">Katalog</a></nav>
+    <nav class="nl nav-main" aria-label="Menu utama"><div class="dd" id="dd"><button type="button" class="tl burger" id="burger" aria-label="Menu katalog" aria-expanded="false" aria-controls="ddm"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="#katalog" id="navKat" aria-current="page" aria-haspopup="true">Katalog</a><div class="ddm" id="ddm"><a href="#katalog" id="navAll">Semua Produk</a><a href="#sale" id="navSale">Sale</a></div></div></nav>
     <div class="nr"><a href="#lokasi" id="navLoc">Location</a><a href="#kontak" id="navContact">Contact</a><button type="button" class="tl" id="cartBtn" aria-label="Buka keranjang">Keranjang (<span id="cartCount">0</span>)</button></div>
   </header>
 
   <div id="vKat">
   <section class="intro">
     <div class="stripe"></div>
-    <h1>Kaos pria casual</h1>
+    <h1 id="katTitle">Kaos pria casual</h1>
     <p>Koleksi kaos G-GANO, dari sablon garis sampai oversized polos. Dibuat di Indonesia. Pilih beberapa kaos ke keranjang, lalu kirim pesanan sekaligus lewat WhatsApp.</p>
   </section>
 
@@ -493,7 +510,9 @@ function colorNames() { return Object.keys(COLORS).filter((c) => PRODUCTS.some((
 function discValues() { return [...new Set(PRODUCTS.map((p) => p.disc || 0))].sort((a, b) => b - a); }
 function priceRange() { const ps = PRODUCTS.map((p) => p.price).filter(Boolean); return ps.length ? [Math.min(...ps), Math.max(...ps)] : [0, 0]; }
 // skip = leave one group out so its option counts reflect the other filters only.
+let saleOnly = false;
 function passes(p, skip) {
+  if (saleOnly && !p.disc) return false;
   if (skip !== "color" && F.colors.size && !p.variants.some((v) => F.colors.has(v.color))) return false;
   if (skip !== "disc" && F.discs.size && !F.discs.has(p.disc || 0)) return false;
   if (skip !== "price") {
@@ -895,14 +914,21 @@ function renderPage(k) { $("pgBody").innerHTML = '<h1>' + PAGES[k].t + '</h1>' +
 
 function setView(v, push) {
   const isPage = Object.prototype.hasOwnProperty.call(PAGES, v);
-  if (v !== "lokasi" && v !== "kontak" && !isPage) v = "katalog";
+  if (v !== "lokasi" && v !== "kontak" && v !== "sale" && !isPage) v = "katalog";
+  const wasSale = saleOnly; saleOnly = v === "sale";
+  if (saleOnly !== wasSale) { renderGrid(); if (!$("fdrawer").hidden) refreshDrawer(); }
+  const shown = v === "sale" ? "katalog" : v; const navKey = v;
   if (isPage) renderPage(v);
   if (v === "lokasi") renderLoc();
-  $("vKat").hidden = v !== "katalog"; $("vLoc").hidden = v !== "lokasi"; $("vContact").hidden = v !== "kontak"; $("vPage").hidden = !isPage;
+  $("vKat").hidden = shown !== "katalog"; $("vLoc").hidden = shown !== "lokasi"; $("vContact").hidden = shown !== "kontak"; $("vPage").hidden = !isPage;
   const ids = { katalog:"navKat", lokasi:"navLoc", kontak:"navContact" };
-  Object.keys(ids).forEach((k) => { const a = $(ids[k]); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
-  document.title = isPage ? "G-GANO " + PAGES[v].t : { katalog:"G-GANO Katalog", lokasi:"G-GANO Location", kontak:"G-GANO Contact" }[v];
+  Object.keys(ids).forEach((k) => { const a = $(ids[k]); if (k === v || (k === "katalog" && v === "sale")) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  [["navAll", v === "katalog"], ["navSale", v === "sale"]].forEach(([id, on]) => { if (on) $(id).setAttribute("aria-current", "page"); else $(id).removeAttribute("aria-current"); });
+  if ($("dd").contains(document.activeElement)) document.activeElement.blur();
+  $("dd").classList.add("shut"); $("dd").classList.remove("open"); $("burger").setAttribute("aria-expanded", "false");
+  document.title = isPage ? "G-GANO " + PAGES[v].t : { katalog:"G-GANO Semua Produk", sale:"G-GANO Sale", lokasi:"G-GANO Location", kontak:"G-GANO Contact" }[v];
   if (push) { try { history.replaceState(null, "", "#" + v); } catch (e) {} }
+  $("katTitle").textContent = saleOnly ? "Sale" : "Kaos pria casual";
   window.scrollTo(0, 0);
   const h = document.querySelector(".top"); if (h) document.documentElement.style.setProperty("--navh", h.offsetHeight + "px");
 }
@@ -910,6 +936,11 @@ document.addEventListener("click", (e) => {
   const a = e.target.closest(".top a[href^=\"#\"], .brand, .announce a[href^=\"#\"], .ft a[href^=\"#\"], .pg a[href^=\"#\"]"); if (!a) return; e.preventDefault();
   setView(a.getAttribute("href").slice(1), true);
 });
+$("burger").addEventListener("click", () => { const o = !$("dd").classList.contains("open"); $("dd").classList.toggle("open", o); $("burger").setAttribute("aria-expanded", String(o)); });
+document.addEventListener("click", (e) => { if (!e.target.closest("#dd")) { $("dd").classList.remove("open"); $("burger").setAttribute("aria-expanded", "false"); } });
+$("dd").addEventListener("mouseleave", () => $("dd").classList.remove("shut"));
+$("dd").addEventListener("mouseenter", () => $("dd").classList.remove("shut"));
+$("dd").addEventListener("focusin", () => $("dd").classList.remove("shut"));
 window.addEventListener("hashchange", () => setView(location.hash.slice(1), false));
 window.addEventListener("resize", () => { const h = document.querySelector(".top"); if (h) document.documentElement.style.setProperty("--navh", h.offsetHeight + "px"); });
 // Announcement slideshow: messages slide to the right, auto-advancing; arrows step manually, hover/focus pauses.
