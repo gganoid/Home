@@ -113,8 +113,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .col{display:inline-flex;align-items:center;gap:6px}
 .col i{width:10px;height:10px;border-radius:50%;border:1px solid rgba(128,128,128,.55);display:inline-block}
 .card h3{font-family:var(--body);font-weight:600;font-size:14.5px;line-height:1.3;letter-spacing:0;text-transform:none;margin:1px 0 0;text-wrap:balance}
+.ptype{margin:0;font-size:13px;color:var(--muted)}
 .price{margin:0;font-size:13px;color:var(--muted)}
-.price b{color:var(--ink);font-size:15px}
+.price b{color:#c4170c;font-size:16px;font-weight:800}
 .price s{color:var(--muted);font-size:12px;margin-right:2px}
 .disc{color:var(--disc);font-size:13px;font-weight:700;margin-left:6px;white-space:nowrap}
 :root{--disc:#c0350a}
@@ -145,8 +146,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .overlay[hidden]{display:none}
 .sheet{background:var(--surface);border-radius:14px;width:100%;max-width:880px;margin-block:auto;position:relative;overflow:hidden;display:grid}
 @media (min-width:760px){.sheet{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}}
-.sheet .pic{background:var(--photo);aspect-ratio:1/1;position:relative}
-.sheet .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.sheet .pic{background:var(--photo);position:relative;display:flex;flex-direction:column;align-self:start}
+.sheet .pic>img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block}
 .sheet .body{display:flex;flex-direction:column;gap:12px;padding:22px 22px 24px;min-width:0}
 .sheet h2{font-family:var(--display);font-weight:700;font-size:36px;line-height:1;letter-spacing:.02em;text-transform:uppercase;margin:0;text-wrap:balance}
 .sheet .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:14px}
@@ -157,7 +158,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .size{min-width:52px;padding:9px 14px;border:1px solid var(--line);background:var(--bg);border-radius:8px;font-weight:700}
 .size[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .sheet .order{margin-top:6px;padding:14px;font-size:15px}
-.gth{position:absolute;left:10px;bottom:10px;display:flex;gap:8px}
+.gth{display:flex;gap:8px;padding:10px;background:var(--photo)}
 .gth button{width:56px;height:56px;padding:0;border:2px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
 .gth button[aria-pressed="true"]{border-color:var(--tag)}
 .gth img{width:100%;height:100%;object-fit:cover;display:block}
@@ -181,7 +182,17 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 .sum{display:flex;justify-content:space-between;gap:12px;margin:14px 0;font-weight:700}
 .cartbox .order{margin-top:4px;padding:14px;font-size:15px}
 .itot{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:13px;color:var(--muted)}
-.itot b{color:var(--ink);font-size:14px}
+.itot b{color:#c4170c;font-size:15px;font-weight:800}
+.itot s{color:var(--muted);margin-right:6px}
+.itot .u{display:block;font-size:12px;color:var(--muted)}
+.itot{align-items:flex-end}.itot .r,.itot b,.itot s,.sumbox s,.sumbox .grand b,.sumbox .save span:last-child{white-space:nowrap}
+.itot .r{text-align:right}
+.sumbox{margin:14px 0;display:grid;gap:6px}
+.sumbox .row{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--muted)}
+.sumbox .row s{color:var(--muted)}
+.sumbox .save{color:#14894c;font-weight:700}
+.sumbox .grand{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-weight:800;font-size:17px;padding-top:8px;border-top:1px solid var(--line)}
+.sumbox .grand b{color:var(--ink)}
 .cartempty{color:var(--muted);padding:18px 0}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--bg);padding:10px 12px 10px 16px;border-radius:999px;display:flex;align-items:center;gap:12px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.3);white-space:nowrap}
 .toast[hidden]{display:none}
@@ -190,7 +201,7 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 .hint{font-size:13px;color:var(--muted);margin:0}
 .x,.nav{position:absolute;z-index:2;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:0;background:rgba(20,22,28,.72);color:#fff;font-size:22px;line-height:1}
 .x{top:10px;right:10px}
-.nav{top:calc(50% - 20px)}
+.nav{top:calc((100% - 76px) / 2 - 20px)}
 .nav.prev{left:10px}
 .nav.next{right:10px}
 
@@ -329,6 +340,60 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 .ct-grid .blank{color:var(--muted)}
 
 @media (max-width:720px){.stats{display:grid;grid-template-columns:repeat(3,1fr)}.stat{min-width:0;padding:10px 12px}.stat b{font-size:30px}.stat span{font-size:10px;letter-spacing:.06em}}
+/* akun + admin */
+.brandrow{position:relative}
+.acct{position:absolute;right:0;top:38px;transform:translateY(-50%);display:inline-flex;padding:6px;color:var(--ink);border-bottom:2px solid transparent}
+.acct svg{width:24px;height:24px}
+.acct:hover{border-bottom-color:var(--line)}
+.acct[aria-current="page"]{border-bottom-color:var(--ink)}
+@media (max-width:720px){.acct{top:28px}.acct svg{width:22px;height:22px}}
+.au{max-width:440px;margin:0 auto;padding-block:26px 40px}
+.au h1,.ad h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,5vw,40px);line-height:.95;text-transform:uppercase;margin:0 0 16px;text-align:center}
+.ad h1{text-align:left}
+.au-note{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:12px 14px;color:var(--muted);font-size:13.5px;line-height:1.55;margin:0 0 18px}
+.au-tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.au-tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 0;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:-1px}
+.au-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.au-form[hidden]{display:none}
+.au-form h2{font-size:18px;margin:0 0 6px}
+.au-form .sub{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.55}
+.fld{display:grid;gap:6px;margin-bottom:16px}
+.fld label{font-size:13px;font-weight:600}
+.fld input[type=text],.fld input[type=password],.fld input[type=email],.fld input[type=tel],.fld input[type=search]{font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
+.fld textarea{font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%;min-height:84px;resize:vertical}
+.fld .hint{font-size:12.5px;color:var(--muted);margin:0}
+.fld .err{font-size:13px;color:#b3261e;margin:0}
+.fld input[aria-invalid="true"]{border-color:#b3261e}
+.pw{position:relative}.pw input{padding-right:96px!important}
+.pw .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;font-size:12.5px;font-weight:600;text-decoration:underline;padding:8px;color:var(--ink)}
+.otp{letter-spacing:.5em;text-align:center;font-size:24px!important;font-weight:700}
+.btn{display:block;width:100%;padding:13px 16px;border:0;border-radius:8px;background:var(--ink);color:var(--bg);font-weight:700;font-size:15px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
+.linkbtn{background:none;border:0;padding:6px 0;font-size:13.5px;text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
+.au-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:-4px 0 16px}
+.au-msg{margin:14px 0 0;font-size:14px;line-height:1.55;color:var(--ink)}
+.au-msg.bad{color:#b3261e}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;margin-bottom:16px}
+.chk input{margin-top:3px;width:18px;height:18px;flex:none}
+.pwm{height:4px;border-radius:2px;background:var(--line);overflow:hidden}.pwm i{display:block;height:100%;width:0;background:#b3261e;transition:width .2s}
+.ftc .adm{text-align:center;padding:0 16px 20px;font-size:12px}
+.ftc .adm a{color:var(--muted)}
+.ad{max-width:960px;margin:0 auto;padding-block:26px 40px}
+.ad h2{font-size:17px;margin:30px 0 12px}
+.ad .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}
+@media (min-width:720px){.ad .stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.ad .stat b{display:block;font-family:var(--display);font-size:38px;line-height:1}
+.ad .stat span{color:var(--muted);font-size:13px}
+.ad form{max-width:520px}
+.ad .tbl{width:100%;border-collapse:collapse;font-size:14px}
+.ad .tbl th,.ad .tbl td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.ad .tbl th{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ad .tbl td.c{white-space:nowrap;color:var(--muted)}
+.ad .tw{overflow-x:auto}
+.ad .lock{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:20px;line-height:1.65}
+.ad .ok{color:#14894c;font-size:14px;margin:10px 0 0}
+.soldout{margin:0;color:#b3261e;font-weight:700;font-size:13px}
 </style>
 
 <div class="uc" role="status">This Website is Under Construction</div>
@@ -341,7 +406,7 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
   </div>
 </div>
 <div class="wrap">
-  <a class="brand" href="#katalog" id="navLogo" aria-label="G-GANO, ke katalog">G-GANO</a>
+  <div class="brandrow"><a class="brand" href="#katalog" id="navLogo" aria-label="G-GANO, ke katalog">G-GANO</a><a href="#masuk" id="navAuth" class="acct" aria-label="Masuk atau daftar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div>
   <header class="top">
     <nav class="nl nav-main" aria-label="Menu utama"><div class="dd" id="dd"><button type="button" class="tl burger" id="burger" aria-label="Menu katalog" aria-expanded="false" aria-controls="ddm"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="#katalog" id="navKat" aria-current="page" aria-haspopup="true">Katalog</a><div class="ddm" id="ddm"><a href="#katalog" id="navAll">Semua Produk</a><a href="#sale" id="navSale">Sale</a></div></div></nav>
     <div class="nr"><a href="#lokasi" id="navLoc">Location</a><a href="#kontak" id="navContact">Contact</a><button type="button" class="tl" id="cartBtn" aria-label="Buka keranjang">Keranjang (<span id="cartCount">0</span>)</button></div>
@@ -350,7 +415,7 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
   <div id="vKat">
   <section class="intro">
     <div class="stripe"></div>
-    <h1 id="katTitle">Kaos pria casual</h1>
+    <h1 id="katTitle">Casual T-shirt Collection</h1>
     <p>Koleksi kaos G-GANO, dari sablon garis sampai oversized polos. Dibuat di Indonesia. Pilih beberapa kaos ke keranjang, lalu kirim pesanan sekaligus lewat WhatsApp.</p>
   </section>
 
@@ -382,6 +447,64 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
     <div class="ct-grid" id="ctGrid"></div>
   </div>
 
+  <div id="vAuth" hidden>
+    <section class="au">
+      <h1>Akun</h1>
+      <p class="au-note" id="auNote"></p>
+      <div class="au-tabs" role="tablist" id="auTabs">
+        <button type="button" role="tab" data-au="login" aria-selected="true">Masuk</button>
+        <button type="button" role="tab" data-au="register" aria-selected="false">Daftar</button>
+      </div>
+
+      <form class="au-form" id="fLogin" data-form="login" novalidate>
+        <div class="fld"><label for="lgId">Email</label><input type="email" id="lgId" inputmode="email" autocomplete="username" placeholder="nama@email.com"><p class="err" data-err="lgId" hidden></p></div>
+        <div class="fld"><label for="lgPw">Kata sandi</label><div class="pw"><input type="password" id="lgPw" autocomplete="current-password"><button type="button" class="eye" data-eye="lgPw">Lihat</button></div><p class="err" data-err="lgPw" hidden></p></div>
+        <div class="au-row"><span></span><button type="button" class="linkbtn" data-au="forgot">Lupa kata sandi?</button></div>
+        <button type="submit" class="btn">Masuk</button>
+        <p class="au-msg" role="status" data-msg></p>
+      </form>
+
+      <form class="au-form" id="fRegister" data-form="register" novalidate hidden>
+        <div class="fld"><label for="rgName">Nama lengkap</label><input type="text" id="rgName" autocomplete="name"><p class="err" data-err="rgName" hidden></p></div>
+        <div class="fld"><label for="rgId">Email</label><input type="email" id="rgId" inputmode="email" autocomplete="username" placeholder="kode OTP akan dikirim ke email ini"><p class="err" data-err="rgId" hidden></p></div>
+        <div class="fld"><label for="rgPw">Buat kata sandi</label><div class="pw"><input type="password" id="rgPw" autocomplete="new-password"><button type="button" class="eye" data-eye="rgPw">Lihat</button></div><div class="pwm" aria-hidden="true"><i id="pwBar"></i></div><p class="hint" id="pwHint">Minimal 8 karakter, ada huruf dan angka.</p><p class="err" data-err="rgPw" hidden></p></div>
+        <div class="fld"><label for="rgPw2">Ulangi kata sandi</label><div class="pw"><input type="password" id="rgPw2" autocomplete="new-password"><button type="button" class="eye" data-eye="rgPw2">Lihat</button></div><p class="err" data-err="rgPw2" hidden></p></div>
+        <label class="chk"><input type="checkbox" id="rgOk"><span>Saya setuju dengan <a href="#privasi">Kebijakan Privasi</a> G-GANO.</span></label>
+        <p class="err" data-err="rgOk" hidden style="margin:-8px 0 14px"></p>
+        <button type="submit" class="btn">Daftar dan kirim kode OTP</button>
+        <p class="au-msg" role="status" data-msg></p>
+      </form>
+
+      <form class="au-form" id="fOtp" data-form="otp" novalidate hidden>
+        <h2>Masukkan kode OTP</h2>
+        <p class="sub" id="otpSub"></p>
+        <div class="fld"><label for="otpCode">Kode 6 angka</label><input type="text" id="otpCode" class="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="------"><p class="err" data-err="otpCode" hidden></p></div>
+        <button type="submit" class="btn">Verifikasi</button>
+        <div class="au-row" style="margin:12px 0 0"><button type="button" class="linkbtn" id="otpResend" disabled>Kirim ulang kode</button><button type="button" class="linkbtn" id="otpBack">Ubah email</button></div>
+        <p class="au-msg" role="status" data-msg></p>
+      </form>
+
+      <form class="au-form" id="fForgot" data-form="forgot" novalidate hidden>
+        <h2>Lupa kata sandi</h2>
+        <p class="sub">Masukkan email yang Anda daftarkan. Kami akan mengirim kode OTP untuk membuat kata sandi baru.</p>
+        <div class="fld"><label for="fgId">Email</label><input type="email" id="fgId" inputmode="email" autocomplete="username"><p class="err" data-err="fgId" hidden></p></div>
+        <button type="submit" class="btn">Kirim kode OTP</button>
+        <div class="au-row" style="margin:12px 0 0"><button type="button" class="linkbtn" data-au="login">Kembali ke Masuk</button><span></span></div>
+        <p class="au-msg" role="status" data-msg></p>
+      </form>
+
+      <form class="au-form" id="fNewpass" data-form="newpass" novalidate hidden>
+        <h2>Buat kata sandi baru</h2>
+        <div class="fld"><label for="npPw">Kata sandi baru</label><div class="pw"><input type="password" id="npPw" autocomplete="new-password"><button type="button" class="eye" data-eye="npPw">Lihat</button></div><p class="hint">Minimal 8 karakter, ada huruf dan angka.</p><p class="err" data-err="npPw" hidden></p></div>
+        <div class="fld"><label for="npPw2">Ulangi kata sandi baru</label><div class="pw"><input type="password" id="npPw2" autocomplete="new-password"><button type="button" class="eye" data-eye="npPw2">Lihat</button></div><p class="err" data-err="npPw2" hidden></p></div>
+        <button type="submit" class="btn">Simpan kata sandi</button>
+        <p class="au-msg" role="status" data-msg></p>
+      </form>
+    </section>
+  </div>
+
+  <div id="vAdmin" hidden><article class="ad" id="adBody"></article></div>
+
   <div id="vPage" hidden><article class="pg" id="pgBody"></article></div>
 
 </div>
@@ -398,24 +521,24 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
 <script>
 /* ===== EDIT HERE ===== */
 // WhatsApp number in international format, digits only. Example: "6281234567890"
-const WA_NUMBER = "";
+let WA_NUMBER = "";
 // Available sizes shown in the detail sheet.
 const SIZES = ["M", "L", "XL", "XXL"];
 // Products. Fill in "name" and "price" (number, in rupiah) whenever ready.
 // While "name" is empty the printed slogan is shown as the title.
 const PRODUCTS = [
-  { code:"GO 4329.6", name:"", design:"World Wide",           color:"Black",    img:"img/gg-01.jpg", detail:"img/gg-31.jpg", price:null },
-  { code:"GO 4329.6", name:"", design:"Positive and Focused", color:"Orange",   img:"img/gg-02.jpg", detail:"img/gg-32.jpg", price:null },
-  { code:"GO 4329.6", name:"", design:"This Moment Is Your Life", color:"Black", img:"img/gg-03.jpg", detail:"img/gg-33.jpg", price:null },
-  { code:"GO 4329.6", name:"", design:"Original Street Wear", color:"Orange",   img:"img/gg-04.jpg", detail:"img/gg-34.jpg", price:null },
-  { code:"GO 4329.6", name:"", design:"01 Denim Outfitters",  color:"Charcoal", img:"img/gg-05.jpg", detail:"img/gg-35.jpg", price:null },
-  { code:"GO 4329.6", name:"", design:"Apparel Original Concept", color:"Charcoal", img:"img/gg-06.jpg", detail:"img/gg-36.jpg", price:null },
-  { code:"GO 4328.6", name:"", design:"Make Today Amazing",   color:"Maroon",   img:"img/gg-07.jpg", detail:"img/gg-37.jpg", price:null },
-  { code:"GO 4328.6", name:"", design:"Follow Your Passion",  color:"Navy",     img:"img/gg-08.jpg", detail:"img/gg-38.jpg", price:null },
-  { code:"GO 4328.6", name:"", design:"Never Give Up",        color:"Navy",     img:"img/gg-09.jpg", detail:"img/gg-39.jpg", price:null },
-  { code:"GO 4328.6", name:"", design:"California Locals Only", color:"Blue",   img:"img/gg-10.jpg", detail:"img/gg-40.jpg", price:null },
-  { code:"GO 4328.6", name:"", design:"Core Denim New York City", color:"Blue", img:"img/gg-11.jpg", detail:"img/gg-41.jpg", price:null },
-  { code:"GO 4328.6", name:"", design:"Nothing Impossible",   color:"Maroon",   img:"img/gg-12.jpg", detail:"img/gg-42.jpg", price:null },
+  { code:"GO 4329.6", name:"", design:"World Wide", price:null, variants:[{ color:"Black", img:"img/gg-121.jpg", detail:"img/gg-31.jpg", flat:"img/gg-01.jpg", photos:["img/gg-121.jpg","img/gg-01.jpg","img/gg-31.jpg"] }] },
+  { code:"GO 4329.6", name:"", design:"Positive and Focused", price:null, variants:[{ color:"Orange", img:"img/gg-122.jpg", detail:"img/gg-32.jpg", flat:"img/gg-02.jpg", photos:["img/gg-122.jpg","img/gg-02.jpg","img/gg-32.jpg"] }] },
+  { code:"GO 4329.6", name:"", design:"This Moment Is Your Life", price:null, variants:[{ color:"Black", img:"img/gg-124.jpg", detail:"img/gg-33.jpg", flat:"img/gg-03.jpg", photos:["img/gg-124.jpg","img/gg-03.jpg","img/gg-33.jpg"] }] },
+  { code:"GO 4329.6", name:"", design:"Original Street Wear", price:null, variants:[{ color:"Orange", img:"img/gg-125.jpg", detail:"img/gg-34.jpg", flat:"img/gg-04.jpg", photos:["img/gg-125.jpg","img/gg-04.jpg","img/gg-34.jpg"] }] },
+  { code:"GO 4329.6", name:"", design:"01 Denim Outfitters", price:null, variants:[{ color:"Charcoal", img:"img/gg-123.jpg", detail:"img/gg-35.jpg", flat:"img/gg-05.jpg", photos:["img/gg-123.jpg","img/gg-05.jpg","img/gg-35.jpg"] }] },
+  { code:"GO 4329.6", name:"", design:"Apparel Original Concept", price:null, variants:[{ color:"Charcoal", img:"img/gg-120.jpg", detail:"img/gg-36.jpg", flat:"img/gg-06.jpg", photos:["img/gg-120.jpg","img/gg-06.jpg","img/gg-36.jpg"] }] },
+  { code:"GO 4328.6", name:"", design:"Make Today Amazing", price:null, variants:[{ color:"Maroon", img:"img/gg-114.jpg", detail:"img/gg-37.jpg", flat:"img/gg-07.jpg", photos:["img/gg-114.jpg","img/gg-07.jpg","img/gg-37.jpg"] }] },
+  { code:"GO 4328.6", name:"", design:"Follow Your Passion", price:null, variants:[{ color:"Navy", img:"img/gg-115.jpg", detail:"img/gg-38.jpg", flat:"img/gg-08.jpg", photos:["img/gg-115.jpg","img/gg-08.jpg","img/gg-38.jpg"] }] },
+  { code:"GO 4328.6", name:"", design:"Never Give Up", price:null, variants:[{ color:"Navy", img:"img/gg-118.jpg", detail:"img/gg-39.jpg", flat:"img/gg-09.jpg", photos:["img/gg-118.jpg","img/gg-09.jpg","img/gg-39.jpg"] }] },
+  { code:"GO 4328.6", name:"", design:"California Locals Only", price:null, variants:[{ color:"Blue", img:"img/gg-116.jpg", detail:"img/gg-40.jpg", flat:"img/gg-10.jpg", photos:["img/gg-116.jpg","img/gg-10.jpg","img/gg-40.jpg"] }] },
+  { code:"GO 4328.6", name:"", design:"Core Denim New York City", price:null, variants:[{ color:"Blue", img:"img/gg-119.jpg", detail:"img/gg-41.jpg", flat:"img/gg-11.jpg", photos:["img/gg-119.jpg","img/gg-11.jpg","img/gg-41.jpg"] }] },
+  { code:"GO 4328.6", name:"", design:"Nothing Impossible", price:null, variants:[{ color:"Maroon", img:"img/gg-117.jpg", detail:"img/gg-42.jpg", flat:"img/gg-12.jpg", photos:["img/gg-117.jpg","img/gg-12.jpg","img/gg-42.jpg"] }] },
   // GO 360.6 oversized basic, sizes L to XXL. One card, tap a color dot to switch photo.
   { code:"GO 360.6", name:"", design:"Oversized Basic", price:null, sizes:["L","XL","XXL"], variants:[
     { color:"Brown",   img:"img/gg-13.jpg" },
@@ -426,12 +549,12 @@ const PRODUCTS = [
     { color:"Mustard",  img:"img/gg-18.jpg" }
   ] },
   // GO 2641.1 white tees. "detail" is the close-up of the print, shown as the second photo.
-  { code:"GO 2641.1", name:"", design:"Ottawa Jazz Festival", price:null, variants:[{ color:"White", img:"img/gg-19.jpg", detail:"img/gg-20.jpg" }] },
-  { code:"GO 2641.1", name:"", design:"We Go Up",             price:null, variants:[{ color:"White", img:"img/gg-21.jpg", detail:"img/gg-22.jpg" }] },
-  { code:"GO 2641.1", name:"", design:"Not Perfect But Cool", price:null, variants:[{ color:"White", img:"img/gg-23.jpg", detail:"img/gg-24.jpg" }] },
-  { code:"GO 2641.1", name:"", design:"NYC Urban Brand",      price:null, variants:[{ color:"White", img:"img/gg-25.jpg", detail:"img/gg-26.jpg" }] },
-  { code:"GO 2641.1", name:"", design:"89 New Generation",    price:null, variants:[{ color:"White", img:"img/gg-27.jpg", detail:"img/gg-28.jpg" }] },
-  { code:"GO 2641.1", name:"", design:"Never Give Up",        price:null, variants:[{ color:"White", img:"img/gg-29.jpg", detail:"img/gg-30.jpg" }] },
+  { code:"GO 2641.1", name:"", design:"Ottawa Jazz Festival", price:null, variants:[{ color:"White", img:"img/gg-130.jpg", detail:"img/gg-20.jpg", flat:"img/gg-19.jpg", photos:["img/gg-130.jpg","img/gg-19.jpg","img/gg-20.jpg"] }] },
+  { code:"GO 2641.1", name:"", design:"We Go Up",             price:null, variants:[{ color:"White", img:"img/gg-131.jpg", detail:"img/gg-22.jpg", flat:"img/gg-21.jpg", photos:["img/gg-131.jpg","img/gg-21.jpg","img/gg-22.jpg"] }] },
+  { code:"GO 2641.1", name:"", design:"Not Perfect But Cool", price:null, variants:[{ color:"White", img:"img/gg-128.jpg", detail:"img/gg-24.jpg", flat:"img/gg-23.jpg", photos:["img/gg-128.jpg","img/gg-23.jpg","img/gg-24.jpg"] }] },
+  { code:"GO 2641.1", name:"", design:"NYC Urban Brand",      price:null, variants:[{ color:"White", img:"img/gg-127.jpg", detail:"img/gg-26.jpg", flat:"img/gg-25.jpg", photos:["img/gg-127.jpg","img/gg-25.jpg","img/gg-26.jpg"] }] },
+  { code:"GO 2641.1", name:"", design:"89 New Generation",    price:null, variants:[{ color:"White", img:"img/gg-129.jpg", detail:"img/gg-28.jpg", flat:"img/gg-27.jpg", photos:["img/gg-129.jpg","img/gg-27.jpg","img/gg-28.jpg"] }] },
+  { code:"GO 2641.1", name:"", design:"Never Give Up",        price:null, variants:[{ color:"White", img:"img/gg-126.jpg", detail:"img/gg-30.jpg", flat:"img/gg-29.jpg", photos:["img/gg-126.jpg","img/gg-29.jpg","img/gg-30.jpg"] }] },
   // GO 2340.5: 4 photos each (front, back, 2 print close-ups)
   { code:"GO 2340.5", name:"", design:"You Can Do It Now", price:null, variants:[{ color:"Blue", img:"img/gg-43.jpg", back:"img/gg-46.jpg", detail:"img/gg-44.jpg", detail2:"img/gg-45.jpg" }] },
   { code:"GO 2340.5", name:"", design:"Brooklyn Time Explains Everything", price:null, variants:[{ color:"Black", img:"img/gg-47.jpg", back:"img/gg-50.jpg", detail:"img/gg-48.jpg", detail2:"img/gg-49.jpg" }] },
@@ -441,18 +564,18 @@ const PRODUCTS = [
   { code:"GO 2340.5", name:"", design:"We Are The Ones", price:null, variants:[{ color:"Navy", img:"img/gg-63.jpg", back:"img/gg-66.jpg", detail:"img/gg-64.jpg", detail2:"img/gg-65.jpg" }] },
   { code:"GO 2340.5", name:"", design:"Freestyle", price:null, variants:[{ color:"Orange", img:"img/gg-67.jpg", back:"img/gg-70.jpg", detail:"img/gg-68.jpg", detail2:"img/gg-69.jpg" }] },
   // GO 2347.5: 3 photos each (front, close-up, back or 2nd close-up)
-  { code:"GO 2347.5", name:"", design:"California Five Boroughs", price:null, variants:[{ color:"Charcoal", img:"img/gg-71.jpg", detail:"img/gg-72.jpg", back:"img/gg-73.jpg", photos:["img/gg-71.jpg","img/gg-72.jpg","img/gg-73.jpg"] }] },
-  { code:"GO 2347.5", name:"", design:"Spirit", price:null, variants:[{ color:"Maroon", img:"img/gg-74.jpg", detail:"img/gg-75.jpg", detail2:"img/gg-76.jpg", photos:["img/gg-74.jpg","img/gg-75.jpg","img/gg-76.jpg"] }] },
-  { code:"GO 2347.5", name:"", design:"Think Different 097", price:null, variants:[{ color:"Charcoal", img:"img/gg-77.jpg", detail:"img/gg-78.jpg", detail2:"img/gg-79.jpg", photos:["img/gg-77.jpg","img/gg-78.jpg","img/gg-79.jpg"] }] },
-  { code:"GO 2347.5", name:"", design:"Brooklyn Varsity", price:null, variants:[{ color:"Maroon", img:"img/gg-80.jpg", detail:"img/gg-81.jpg", detail2:"img/gg-82.jpg", photos:["img/gg-80.jpg","img/gg-81.jpg","img/gg-82.jpg"] }] },
-  { code:"GO 2347.5", name:"", design:"Great Things NYC Style", price:null, variants:[{ color:"Navy", img:"img/gg-83.jpg", detail:"img/gg-84.jpg" }] },
+  { code:"GO 2347.5", name:"", design:"California Five Boroughs", price:null, variants:[{ color:"Charcoal", img:"img/gg-107.jpg", detail:"img/gg-72.jpg", back:"img/gg-73.jpg", flat:"img/gg-71.jpg", photos:["img/gg-107.jpg","img/gg-71.jpg","img/gg-72.jpg","img/gg-73.jpg"] }] },
+  { code:"GO 2347.5", name:"", design:"Spirit", price:null, variants:[{ color:"Maroon", img:"img/gg-103.jpg", detail:"img/gg-75.jpg", detail2:"img/gg-76.jpg", flat:"img/gg-74.jpg", photos:["img/gg-103.jpg","img/gg-74.jpg","img/gg-75.jpg","img/gg-76.jpg"] }] },
+  { code:"GO 2347.5", name:"", design:"Think Different 097", price:null, variants:[{ color:"Charcoal", img:"img/gg-104.jpg", detail:"img/gg-78.jpg", detail2:"img/gg-79.jpg", flat:"img/gg-77.jpg", photos:["img/gg-104.jpg","img/gg-77.jpg","img/gg-78.jpg","img/gg-79.jpg"] }] },
+  { code:"GO 2347.5", name:"", design:"Brooklyn Varsity", price:null, variants:[{ color:"Maroon", img:"img/gg-105.jpg", detail:"img/gg-81.jpg", detail2:"img/gg-82.jpg", flat:"img/gg-80.jpg", photos:["img/gg-105.jpg","img/gg-80.jpg","img/gg-81.jpg","img/gg-82.jpg"] }] },
+  { code:"GO 2347.5", name:"", design:"Great Things NYC Style", price:null, variants:[{ color:"Navy", img:"img/gg-106.jpg", detail:"img/gg-84.jpg", flat:"img/gg-83.jpg", photos:["img/gg-106.jpg","img/gg-83.jpg","img/gg-84.jpg"] }] },
   // GO 3586.1 white all-over tees: front, close-up, back
-  { code:"GO 3586.1", name:"", design:"Brooklyn New York", price:null, variants:[{ color:"White", img:"img/gg-85.jpg", detail:"img/gg-86.jpg", photos:["img/gg-85.jpg","img/gg-86.jpg","img/gg-87.jpg"] }] },
-  { code:"GO 3586.1", name:"", design:"Move On", price:null, variants:[{ color:"White", img:"img/gg-88.jpg", detail:"img/gg-89.jpg", photos:["img/gg-88.jpg","img/gg-89.jpg","img/gg-90.jpg"] }] },
-  { code:"GO 3586.1", name:"", design:"1967 Sport House", price:null, variants:[{ color:"White", img:"img/gg-91.jpg", detail:"img/gg-92.jpg", photos:["img/gg-91.jpg","img/gg-92.jpg","img/gg-93.jpg"] }] },
-  { code:"GO 3586.1", name:"", design:"Outside The Box", price:null, variants:[{ color:"White", img:"img/gg-94.jpg", detail:"img/gg-95.jpg", photos:["img/gg-94.jpg","img/gg-95.jpg","img/gg-96.jpg"] }] },
-  { code:"GO 3586.1", name:"", design:"NYC 89 Sports", price:null, variants:[{ color:"White", img:"img/gg-97.jpg", detail:"img/gg-98.jpg", photos:["img/gg-97.jpg","img/gg-98.jpg","img/gg-99.jpg"] }] },
-  { code:"GO 3586.1", name:"", design:"Be Yourself Now", price:null, variants:[{ color:"White", img:"img/gg-100.jpg", detail:"img/gg-101.jpg", photos:["img/gg-100.jpg","img/gg-101.jpg","img/gg-102.jpg"] }] }
+  { code:"GO 3586.1", name:"", design:"Brooklyn New York", price:null, variants:[{ color:"White", img:"img/gg-113.jpg", detail:"img/gg-86.jpg",  flat:"img/gg-85.jpg", photos:["img/gg-113.jpg","img/gg-85.jpg","img/gg-86.jpg","img/gg-87.jpg"] }] },
+  { code:"GO 3586.1", name:"", design:"Move On", price:null, variants:[{ color:"White", img:"img/gg-112.jpg", detail:"img/gg-89.jpg",  flat:"img/gg-88.jpg", photos:["img/gg-112.jpg","img/gg-88.jpg","img/gg-89.jpg","img/gg-90.jpg"] }] },
+  { code:"GO 3586.1", name:"", design:"1967 Sport House", price:null, variants:[{ color:"White", img:"img/gg-108.jpg", detail:"img/gg-92.jpg",  flat:"img/gg-91.jpg", photos:["img/gg-108.jpg","img/gg-91.jpg","img/gg-92.jpg","img/gg-93.jpg"] }] },
+  { code:"GO 3586.1", name:"", design:"Outside The Box", price:null, variants:[{ color:"White", img:"img/gg-109.jpg", detail:"img/gg-95.jpg",  flat:"img/gg-94.jpg", photos:["img/gg-109.jpg","img/gg-94.jpg","img/gg-95.jpg","img/gg-96.jpg"] }] },
+  { code:"GO 3586.1", name:"", design:"NYC 89 Sports", price:null, variants:[{ color:"White", img:"img/gg-110.jpg", detail:"img/gg-98.jpg",  flat:"img/gg-97.jpg", photos:["img/gg-110.jpg","img/gg-97.jpg","img/gg-98.jpg","img/gg-99.jpg"] }] },
+  { code:"GO 3586.1", name:"", design:"Be Yourself Now", price:null, variants:[{ color:"White", img:"img/gg-111.jpg", detail:"img/gg-101.jpg",  flat:"img/gg-100.jpg", photos:["img/gg-111.jpg","img/gg-100.jpg","img/gg-101.jpg","img/gg-102.jpg"] }] }
 ];
 const COLORS = { Black:"#15161a", Orange:"#c9680f", Charcoal:"#4a4c5a", Maroon:"#6b1426", Navy:"#1f2150", Blue:"#2a5385", Brown:"#8a5a4c", Cream:"#c9b79c", Green:"#5e7468", Mustard:"#c28a3a", White:"#f6f6f4" };
 /* ===================== */
@@ -466,23 +589,35 @@ const rupiah = (n) => "Rp " + Number(n).toLocaleString("id-ID");
 const waLink = (text) => "https://wa.me/" + (WA_NUMBER || "") + "?text=" + encodeURIComponent(text);
 
 // Every product has variants (one per color). Single-color shirts get one variant.
-// Promo prices per code: "was" = list price, "price" = price after the 10% discount tag.
+// Promo prices per code: "was" = Harga konsi (coret), "price" = Harga jual online. Persen diskon dihitung otomatis.
 const PROMO = {
-  "GO 4328.6": { was:97900, price:88110 }, "GO 4329.6": { was:97900, price:88110 },
-  "GO 2340.5": { was:97900, price:88110 }, "GO 2347.5": { was:97900, price:88110 },
-  "GO 360.6":  { was:79900, price:71910 }, "GO 3586.1": { was:89900, price:80910 }, "GO 2641.1": { was:74900, price:67410 }
+  "GO 4328.6": { was:229800, price:97900 }, "GO 4329.6": { was:229800, price:97900 },
+  "GO 2340.5": { was:229800, price:97900 }, "GO 2347.5": { was:229800, price:97900 },
+  "GO 360.6":  { was:189800, price:79900 }, "GO 3586.1": { was:199800, price:89900 }, "GO 2641.1": { was:159800, price:74900 }
 };
-PRODUCTS.forEach((p) => { const d = PROMO[p.code]; if (d) { p.was = d.was; p.price = d.price; p.disc = 10; } });
+const SKU = {"GO 4328.6|Make Today Amazing": ["GO 4328.6-3561", "2026-08-23"], "GO 4328.6|Follow Your Passion": ["GO 4328.6-3562", "2026-08-23"], "GO 4328.6|California Locals Only": ["GO 4328.6-3563", "2026-08-23"], "GO 4328.6|Nothing Impossible": ["GO 4328.6-3564", "2026-08-23"], "GO 4328.6|Never Give Up": ["GO 4328.6-3565", "2026-08-23"], "GO 4328.6|Core Denim New York City": ["GO 4328.6-3566", "2026-08-23"], "GO 4329.6|Apparel Original Concept": ["GO 4329.6-3567", "2026-09-07"], "GO 4329.6|World Wide": ["GO 4329.6-3568", "2026-09-07"], "GO 4329.6|Positive and Focused": ["GO 4329.6-3569", "2026-09-07"], "GO 4329.6|01 Denim Outfitters": ["GO 4329.6-3570", "2026-09-07"], "GO 4329.6|This Moment Is Your Life": ["GO 4329.6-3571", "2026-09-07"], "GO 4329.6|Original Street Wear": ["GO 4329.6-3572", "2026-09-07"], "GO 2340.5|Brooklyn Time Explains Everything": ["GO 2340.5-3536", "2025-11-11"], "GO 2340.5|Have A Nice Day": ["GO 2340.5-3537", "2025-11-11"], "GO 2340.5|Freestyle": ["GO 2340.5-3538", "2025-11-11"], "GO 2340.5|You Can Do It Now": ["GO 2340.5-3539", "2025-11-11"], "GO 2340.5|Stay Humble": ["GO 2340.5-3540", "2025-11-11"], "GO 2340.5|California Core": ["GO 2340.5-3541", "2025-11-11"], "GO 2340.5|We Are The Ones": ["GO 2340.5-3542", "2025-11-11"], "GO 2347.5|Spirit": ["GO 2347.5-3511", "2025-07-18"], "GO 2347.5|Think Different 097": ["GO 2347.5-3512", "2025-07-18"], "GO 2347.5|Great Things NYC Style": ["GO 2347.5-3513", "2025-07-18"], "GO 2347.5|Brooklyn Varsity": ["GO 2347.5-3514", "2025-07-18"], "GO 2347.5|California Five Boroughs": ["GO 2347.5-3515", "2025-07-18"], "GO 3586.1|1967 Sport House": ["GO 3586.1-3503", "2025-06-28"], "GO 3586.1|Outside The Box": ["GO 3586.1-3504", "2025-06-28"], "GO 3586.1|NYC 89 Sports": ["GO 3586.1-3505", "2025-06-28"], "GO 3586.1|Be Yourself Now": ["GO 3586.1-3506", "2025-06-28"], "GO 3586.1|Move On": ["GO 3586.1-3507", "2025-06-28"], "GO 3586.1|Brooklyn New York": ["GO 3586.1-3508", "2025-06-28"], "GO 2641.1|Not Perfect But Cool": ["GO 2641.1-1189", "2025-06-21"], "GO 2641.1|89 New Generation": ["GO 2641.1-1190", "2025-06-21"], "GO 2641.1|Ottawa Jazz Festival": ["GO 2641.1-1191", "2025-06-21"], "GO 2641.1|We Go Up": ["GO 2641.1-1192", "2025-06-21"], "GO 2641.1|Never Give Up": ["GO 2641.1-1193", "2025-06-21"], "GO 2641.1|NYC Urban Brand": ["GO 2641.1-1194", "2025-06-21"], "GO 360.6|Oversized Basic": ["GO 360.6", "2026-10-23"]};
+PRODUCTS.forEach((p) => { const k = SKU[p.code + "|" + p.design]; if (k) { p.sku = k[0]; p.date = k[1]; } });
+// Catalog order: by code (e.g. GO 2340.5-3536), numbers compared as numbers.
+const skuKey = (p) => { const m = String(p.sku || p.code).match(/(\d+(?:\.\d+)?)(?:-(\d+))?/); return [m ? parseFloat(m[1]) : 0, m && m[2] ? Number(m[2]) : 0]; };
+PRODUCTS.sort((a, b) => { const x = skuKey(a), y = skuKey(b); return x[0] - y[0] || x[1] - y[1]; });
+const dayAge = (p) => p.date ? Math.floor((Date.now() - new Date(p.date + "T00:00:00")) / 864e5) : null;
+const ageOf = (p) => { const a = dayAge(p); return a !== null && a <= 90 ? "baru" : "lama"; };
+const BULAN = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const dateId = (iso) => { const [y, m, d] = iso.split("-"); return Number(d) + " " + BULAN[Number(m) - 1] + " " + y; };
+const skuOf = (p) => p.sku || p.code;
+PRODUCTS.forEach((p) => { const d = PROMO[p.code]; if (d) { p.was = d.was; p.price = d.price; p.disc = Math.round((1 - d.price / d.was) * 100); } });
+const MAXDISC = Math.max(0, ...PRODUCTS.map((p) => p.disc || 0));
+if (MAXDISC) document.querySelector("#annTrack p").textContent = "Diskon hingga " + MAXDISC + "% untuk semua kaos";
 PRODUCTS.forEach((p) => { if (!p.variants) p.variants = [{ color:p.color, img:p.img, detail:p.detail }]; p.v = 0; });
 const cur = (p) => p.variants[p.v];
 
 function orderText(p, size) {
-  let t = "Halo G-GANO, saya mau pesan kaos " + title(p) + " (kode " + p.code + "), warna " + cur(p).color + ".";
+  let t = "Halo G-GANO, saya mau pesan kaos " + title(p) + " (kode " + skuOf(p) + "), warna " + cur(p).color + ".";
   t += size ? " Ukuran " + size + "." : " Ukuran apa saja yang tersedia?";
   return t;
 }
 function priceHtml(p) {
-  if (p.was) return '<p class="price"><s>' + rupiah(p.was) + '</s> <b>' + rupiah(p.price) + '</b> <span class="disc">Diskon ' + p.disc + '%</span></p>';
+  if (p.was) return '<p class="price"><s>' + rupiah(p.was) + '</s> <b>' + rupiah(p.price) + '</b></p>';
   return p.price ? '<p class="price"><b>' + rupiah(p.price) + '</b></p>' : '<p class="price">Harga via WhatsApp</p>';
 }
 function dotsHtml(p) {
@@ -493,7 +628,7 @@ function dotsHtml(p) {
 }
 
 // Filter state: colors / discounts are multi-select, price is an optional min/max in rupiah.
-const F = { colors:new Set(), discs:new Set(), min:null, max:null };
+const F = { colors:new Set(), discs:new Set(), ages:new Set(), min:null, max:null, sort:null };
 let list = PRODUCTS.slice();
 let openIdx = -1;
 let selectedSize = "";
@@ -514,6 +649,7 @@ let saleOnly = false;
 function passes(p, skip) {
   if (saleOnly && !p.disc) return false;
   if (skip !== "color" && F.colors.size && !p.variants.some((v) => F.colors.has(v.color))) return false;
+  if (skip !== "age" && F.ages.size && !F.ages.has(ageOf(p))) return false;
   if (skip !== "disc" && F.discs.size && !F.discs.has(p.disc || 0)) return false;
   if (skip !== "price") {
     if (F.min != null && !(p.price != null && p.price >= F.min)) return false;
@@ -523,8 +659,10 @@ function passes(p, skip) {
 }
 const colorCount = (c) => PRODUCTS.filter((p) => passes(p, "color") && p.variants.some((v) => v.color === c)).length;
 const discCount = (d) => PRODUCTS.filter((p) => passes(p, "disc") && (p.disc || 0) === d).length;
+const ageCount = (a) => PRODUCTS.filter((p) => passes(p, "age") && ageOf(p) === a).length;
+const ageLabel = (a) => a === "baru" ? "Baru (90 hari terakhir)" : "Lama";
 const discLabel = (d) => d ? "Diskon " + d + "%" : "Tanpa diskon";
-function activeGroups() { return (F.colors.size ? 1 : 0) + (F.discs.size ? 1 : 0) + (F.min != null || F.max != null ? 1 : 0); }
+function activeGroups() { return (F.colors.size ? 1 : 0) + (F.discs.size ? 1 : 0) + (F.ages.size ? 1 : 0) + (F.sort ? 1 : 0) + (F.min != null || F.max != null ? 1 : 0); }
 
 function renderFilters() {
   $("filters").innerHTML = '<button type="button" class="fbtn" id="fbtn" aria-haspopup="dialog">' + ICON_FILTER + 'Filter &amp; Sort<span class="n" id="fbadge" hidden></span></button>';
@@ -548,15 +686,20 @@ function cardHtml(p, i) {
       (v.detail ? '<img class="alt" src="' + v.detail + '" alt="" width="1000" height="1000" loading="lazy">' : '') +
     '</button>' +
     '<div class="info" data-open="' + i + '">' +
-      '<div class="meta"><span class="code">' + p.code + '</span><span class="col"><i style="background:' + COLORS[v.color] + '"></i><span class="cname">' + v.color + '</span></span></div>' +
+      '<div class="meta"><span class="col"><i style="background:' + COLORS[v.color] + '"></i><span class="cname">' + v.color + '</span></span></div>' +
       dotsHtml(p) +
-      '<h3>' + esc(title(p)) + '</h3>' + priceHtml(p) +
+      '<h3>' + esc(title(p)) + '</h3><p class="ptype">T-shirt</p>' + priceHtml(p) + (isOut(p) ? '<p class="soldout">Habis</p>' : '') +
     '</div>' +
   '</article>';
 }
 
 function renderGrid() {
   list = PRODUCTS.filter((p) => passes(p));
+  if (F.sort) {
+    const key = (p) => F.sort === "hi" || F.sort === "lo" ? (p.disc || 0) : (p.date ? Date.parse(p.date) : 0);
+    const dir = F.sort === "hi" || F.sort === "new" ? -1 : 1;
+    list = list.map((p, i) => [p, i]).sort((a, b) => dir * (key(a[0]) - key(b[0])) || a[1] - b[1]).map((x) => x[0]);
+  }
   if (F.colors.size) list.forEach((p) => { const j = p.variants.findIndex((v) => F.colors.has(v.color)); if (j >= 0) p.v = j; });
   $("count").textContent = "Menampilkan " + list.length + " dari " + PRODUCTS.length + " kaos";
   $("grid").innerHTML = list.length ? list.map(cardHtml).join("") : '<p class="empty">Belum ada kaos yang cocok dengan filter ini. Coba ubah atau hapus filter.</p>';
@@ -596,16 +739,16 @@ function renderSheet() {
       (slidesOf(p).length > 1 ? '<button type="button" class="nav prev" data-step="-1" aria-label="Sebelumnya">&#8249;</button><button type="button" class="nav next" data-step="1" aria-label="Berikutnya">&#8250;</button>' : '') +
        thumbsHtml(v) + '</div>' +
       '<div class="body">' +
-        '<span class="code" style="font-size:13px">' + p.code + '</span>' +
+        '<span class="code" style="font-size:13px">' + skuOf(p) + '</span>' +
         '<h2>' + esc(title(p)) + '</h2>' + priceHtml(p) +
-        '<dl class="kv"><dt>Warna</dt><dd>' + v.color + '</dd><dt>Produk</dt><dd>Kaos pria casual G-GANO</dd></dl>' +
+        '<dl class="kv"><dt>Warna</dt><dd>' + v.color + '</dd><dt>Produk</dt><dd>Kaos pria casual G-GANO</dd>' + (p.date ? '<dt>Rilis</dt><dd>' + dateId(p.date) + '</dd>' : '') + '</dl>' +
         (p.variants.length > 1 ? '<div class="label">Pilih warna</div>' + dotsHtml(p) : '') +
         '<div class="label">Ukuran</div>' +
         '<div class="sizes">' + (p.sizes || SIZES).map((s) => '<button type="button" class="size" data-size="' + s + '" aria-pressed="' + (s === selectedSize) + '">' + s + '</button>').join("") + '</div>' +
         '<div class="label">Jumlah</div>' +
         '<div class="qty"><button type="button" data-q="-1" aria-label="Kurangi jumlah">&minus;</button><output id="qtyOut">' + qty + '</output><button type="button" data-q="1" aria-label="Tambah jumlah">+</button></div>' +
-        '<button type="button" class="order" data-add' + (selectedSize ? '' : ' disabled') + '>' + CART_ICON + 'Tambah ke keranjang</button>' +
-        '<p class="hint">' + (selectedSize ? 'Ukuran ' + selectedSize + ', ' + qty + ' pcs.' : 'Pilih ukuran dulu untuk menambahkan ke keranjang.') + '</p>' +
+        '<button type="button" class="order" data-add' + (selectedSize && !isOut(p) ? '' : ' disabled') + '>' + CART_ICON + 'Tambah ke keranjang</button>' +
+        '<p class="hint">' + (isOut(p) ? 'Stok kaos ini sedang habis.' : selectedSize ? 'Ukuran ' + selectedSize + ', ' + qty + ' pcs.' : 'Pilih ukuran dulu untuk menambahkan ke keranjang.') + '</p>' +
       '</div>' +
     '</div>';
 }
@@ -651,16 +794,18 @@ function refreshCartBadge() {
 function addToCart(p) {
   const v = cur(p), t = title(p);
   const hit = cart.find((x) => x.code === p.code && x.title === t && x.color === v.color && x.size === selectedSize);
-  if (hit) hit.qty += qty; else cart.push({ code:p.code, title:t, color:v.color, size:selectedSize, qty:qty, img:v.img, price:p.price || null });
+  if (hit) hit.qty += qty; else cart.push({ code:p.code, sku:skuOf(p), title:t, color:v.color, size:selectedSize, qty:qty, img:v.img, price:p.price || null });
   saveCart(); refreshCartBadge();
 }
 // Current price for a cart row (looked up live so rows saved before prices existed still total correctly).
 function priceOf(x) { const p = PRODUCTS.find((q) => q.code === x.code && title(q) === x.title); return (p && p.price) || x.price || 0; }
+function wasOf(x) { const p = PRODUCTS.find((q) => q.code === x.code && title(q) === x.title); return (p && p.was) || priceOf(x); }
+function cartWas() { return cart.reduce((n, x) => n + wasOf(x) * x.qty, 0); }
 function cartSum() { return cart.reduce((n, x) => n + priceOf(x) * x.qty, 0); }
 function cartText() {
-  const lines = cart.map((x, i) => (i + 1) + ". " + x.title + " (" + x.code + ") - " + x.color + " - " + x.size + " - " + x.qty + " pcs" + (priceOf(x) ? " x " + rupiah(priceOf(x)) + " = " + rupiah(priceOf(x) * x.qty) : ""));
+  const lines = cart.map((x, i) => (i + 1) + ". " + x.title + " (" + (x.sku || x.code) + ") - " + x.color + " - " + x.size + " - " + x.qty + " pcs" + (priceOf(x) ? " x " + rupiah(priceOf(x)) + " = " + rupiah(priceOf(x) * x.qty) : ""));
   let t = "Halo G-GANO, saya mau pesan:\n" + lines.join("\n") + "\n\nTotal: " + cartQty() + " pcs";
-  if (cart.every(priceOf)) t += "\nTotal harga: " + rupiah(cartSum());
+  if (cart.every(priceOf)) t += (cartWas() > cartSum() ? "\nTotal sebelum diskon: " + rupiah(cartWas()) + "\nHemat: " + rupiah(cartWas() - cartSum()) : "") + "\nTotal harga: " + rupiah(cartSum());
   return t + "\nMohon info harga, stok, dan cara pembayaran.";
 }
 function renderCart() {
@@ -671,11 +816,13 @@ function renderCart() {
   }
   const priced = cart.every(priceOf);
   box.innerHTML = '<div class="sheet cartbox"><button type="button" class="x" data-cclose aria-label="Tutup">&times;</button><h2>Keranjang</h2><ul class="items">' +
-    cart.map((x, i) => '<li class="item"><img src="' + x.img + '" alt=""><div><b>' + esc(x.title) + '</b><small>' + esc(x.code) + ' · ' + esc(x.color) + ' · Ukuran ' + esc(x.size) + '</small>' +
+    cart.map((x, i) => '<li class="item"><img src="' + x.img + '" alt=""><div><b>' + esc(x.title) + '</b><small>' + esc(x.sku || x.code) + ' · ' + esc(x.color) + ' · Ukuran ' + esc(x.size) + '</small>' +
       '<div class="qty"><button type="button" data-cq="-1" data-ci="' + i + '" aria-label="Kurangi">&minus;</button><output>' + x.qty + '</output><button type="button" data-cq="1" data-ci="' + i + '" aria-label="Tambah">+</button></div>' +
-      (priceOf(x) ? '<div class="itot"><span>' + rupiah(priceOf(x)) + ' x ' + x.qty + '</span><b>' + rupiah(priceOf(x) * x.qty) + '</b></div>' : '') + '</div>' +
+      (priceOf(x) ? '<div class="itot"><span>' + '<span class="u">' + rupiah(priceOf(x)) + ' x ' + x.qty + '</span></span><span class="r">' + (wasOf(x) > priceOf(x) ? '<s>' + rupiah(wasOf(x) * x.qty) + '</s><br>' : '') + '<b>' + rupiah(priceOf(x) * x.qty) + '</b></span></div>' : '') + '</div>' +
       '<button type="button" class="rm" data-crm="' + i + '">Hapus</button></li>').join("") + '</ul>' +
-    '<div class="sum"><span>' + cartQty() + ' pcs</span>' + (priced ? '<span>' + rupiah(cartSum()) + '</span>' : '<span style="font-weight:400;color:var(--muted)">Harga dikonfirmasi via WhatsApp</span>') + '</div>' +
+    (priced ? '<div class="sumbox"><div class="row"><span>Total sebelum diskon (' + cartQty() + ' pcs)</span><span>' + rupiah(cartWas()) + '</span></div>' +
+      (cartWas() > cartSum() ? '<div class="row save"><span>Hemat</span><span>- ' + rupiah(cartWas() - cartSum()) + '</span></div>' : '') +
+      '<div class="grand"><span>Total setelah diskon</span><b>' + rupiah(cartSum()) + '</b></div></div>' : '<div class="sum"><span>' + cartQty() + ' pcs</span><span style="font-weight:400;color:var(--muted)">Harga dikonfirmasi via WhatsApp</span></div>') +
     '<a class="order" href="' + waLink(cartText()) + '" target="_blank" rel="noopener">' + WA_ICON + 'Kirim pesanan via WhatsApp</a></div>';
 }
 function openCart() {
@@ -723,7 +870,10 @@ function drawerHtml() {
   return '<div class="panel"><div class="fhead"><h2>Filter &amp; Sort</h2><button type="button" class="fclear" id="fclear">Hapus semua</button><button type="button" class="fx" id="fclose" aria-label="Tutup">&times;</button></div>' +
     '<div class="fbody">' +
       fsec("color", "Warna", '<div class="cgrid">' + colorNames().map((c) => rowHtml("color", c, c, COLORS[c])).join("") + '</div>') +
-      fsec("disc", "Diskon", discValues().map((d) => rowHtml("disc", d, discLabel(d))).join("")) +
+      fsec("disc", "Diskon", [["hi", "Diskon tertinggi ke terendah"], ["lo", "Diskon terendah ke tertinggi"]].map((o) =>
+        '<label class="frow" data-row="sort:' + o[0] + '"><input type="checkbox" data-sort="' + o[0] + '"><span class="box"></span><span class="nm">' + o[1] + '</span></label>').join("")) +
+      fsec("age", "Rilis", [["new", "Terbaru"], ["old", "Terlama"]].map((o) =>
+        '<label class="frow" data-row="sort:' + o[0] + '"><input type="checkbox" data-sort="' + o[0] + '"><span class="box"></span><span class="nm">' + o[1] + '</span></label>').join("")) +
       fsec("price", "Harga", '<div class="prow"><label>Minimum<span class="pin">Rp<input id="pmin" type="number" inputmode="numeric" min="0" step="1000" placeholder="' + lo + '"></span></label>' +
         '<label>Maksimum<span class="pin">Rp<input id="pmax" type="number" inputmode="numeric" min="0" step="1000" placeholder="' + hi + '"></span></label></div>' +
         '<p class="phint">Rentang harga: ' + rupiah(lo) + ' – ' + rupiah(hi) + '</p>') +
@@ -733,11 +883,12 @@ function refreshDrawer() {
   const typing = document.activeElement && document.activeElement.matches("#pmin,#pmax");
   document.querySelectorAll("#fdrawer [data-f]").forEach((i) => {
     const kind = i.dataset.f, val = kind === "disc" ? Number(i.value) : i.value;
-    const on = (kind === "color" ? F.colors : F.discs).has(val), n = kind === "color" ? colorCount(val) : discCount(val);
+    const on = (kind === "color" ? F.colors : kind === "age" ? F.ages : F.discs).has(val), n = kind === "color" ? colorCount(val) : kind === "age" ? ageCount(val) : discCount(val);
     i.checked = on;
     const row = i.closest(".frow"); row.classList.toggle("on", on); row.classList.toggle("zero", n === 0);
     row.querySelector(".ct").textContent = kind === "color" ? "(" + n + ")" : "[" + n + "]";
   });
+  document.querySelectorAll("#fdrawer [data-sort]").forEach((i) => { const on = F.sort === i.dataset.sort; i.checked = on; i.closest(".frow").classList.toggle("on", on); });
   if (!typing) { $("pmin").value = F.min != null ? F.min : ""; $("pmax").value = F.max != null ? F.max : ""; }
   $("fshow").textContent = "Tampilkan " + list.length + " kaos";
 }
@@ -754,9 +905,13 @@ function closeDrawer() {
 function applyFilters() { syncTop(); renderGrid(); if (!$("fdrawer").hidden) refreshDrawer(); }
 $("fdrawer").addEventListener("change", (e) => {
   const i = e.target.closest("[data-f]"); if (!i) return;
-  const set = i.dataset.f === "color" ? F.colors : F.discs, val = i.dataset.f === "disc" ? Number(i.value) : i.value;
+  const set = i.dataset.f === "color" ? F.colors : i.dataset.f === "age" ? F.ages : F.discs, val = i.dataset.f === "disc" ? Number(i.value) : i.value;
   if (i.checked) set.add(val); else set.delete(val);
   applyFilters();
+});
+$("fdrawer").addEventListener("change", (e) => {
+  const i = e.target.closest("[data-sort]"); if (!i) return;
+  F.sort = i.checked ? i.dataset.sort : null; applyFilters();
 });
 $("fdrawer").addEventListener("input", (e) => {
   if (!e.target.matches("#pmin,#pmax")) return;
@@ -766,7 +921,7 @@ $("fdrawer").addEventListener("input", (e) => {
 });
 $("fdrawer").addEventListener("click", (e) => {
   if (e.target === $("fdrawer") || e.target.closest("#fclose") || e.target.closest("#fshow")) return closeDrawer();
-  if (e.target.closest("#fclear")) { F.colors.clear(); F.discs.clear(); F.min = F.max = null; return applyFilters(); }
+  if (e.target.closest("#fclear")) { F.colors.clear(); F.discs.clear(); F.ages.clear(); F.sort = null; F.min = F.max = null; return applyFilters(); }
   const h = e.target.closest("[data-fsec]");
   if (h) { const open = h.getAttribute("aria-expanded") === "true"; h.setAttribute("aria-expanded", String(!open)); $("fs-" + h.dataset.fsec).hidden = open; }
 });
@@ -783,7 +938,7 @@ $("overlay").addEventListener("click", (e) => {
   const qb = e.target.closest("[data-q]");
   if (qb) { qty = Math.max(1, Math.min(99, qty + Number(qb.dataset.q))); $("qtyOut").textContent = qty; const h = $("overlay").querySelector(".hint"); if (selectedSize) h.textContent = "Ukuran " + selectedSize + ", " + qty + " pcs."; return; }
   if (e.target.closest("[data-add]")) {
-    if (!selectedSize) return;
+    if (!selectedSize || isOut(list[openIdx])) return;
     addToCart(list[openIdx]); closeSheet(); showToast("Ditambahkan ke keranjang"); return;
   }
   const g = e.target.closest("[data-g]");
@@ -899,7 +1054,7 @@ const soon = '<p class="soon">Halaman ini sedang disiapkan. Untuk informasi lebi
 const PAGES = {
   tentang: { t:"Tentang G-GANO", h:() => '<p>G-GANO adalah merek kaos pria casual, Denim Premium Product, dibuat di Indonesia.</p><p>Koleksi kami mencakup kaos bersablon garis, all-over print, sampai oversized polos, tersedia dalam berbagai warna dan ukuran.</p><p>Lihat koleksi lengkap di <a href="#katalog">Katalog</a>, atau temukan toko terdekat di <a href="#lokasi">Our Location</a>.</p>' },
   ketentuan: { t:"Ketentuan Layanan", h:() => soon },
-  promosi: { t:"Promosi", h:() => '<p>Diskon 10% untuk semua kaos G-GANO.</p><table><thead><tr><th>Kode</th><th>Harga awal</th><th>Harga diskon</th></tr></thead><tbody>' +
+  promosi: { t:"Promosi", h:() => '<p>Diskon hingga ' + MAXDISC + '% untuk kaos G-GANO.</p><table><thead><tr><th>Kode</th><th>Harga awal</th><th>Harga diskon</th></tr></thead><tbody>' +
       Object.keys(PROMO).map((c) => '<tr><td>' + c + '</td><td><s>' + rupiah(PROMO[c].was) + '</s></td><td><b>' + rupiah(PROMO[c].price) + '</b></td></tr>').join("") + '</tbody></table><p><a href="#katalog">Belanja sekarang</a></p>' },
   karir: { t:"Karir", h:() => soon },
   blog: { t:"Blog", h:() => soon },
@@ -914,26 +1069,28 @@ function renderPage(k) { $("pgBody").innerHTML = '<h1>' + PAGES[k].t + '</h1>' +
 
 function setView(v, push) {
   const isPage = Object.prototype.hasOwnProperty.call(PAGES, v);
-  if (v !== "lokasi" && v !== "kontak" && v !== "sale" && !isPage) v = "katalog";
+  if (v !== "lokasi" && v !== "kontak" && v !== "sale" && v !== "masuk" && v !== "admin" && !isPage) v = "katalog";
   const wasSale = saleOnly; saleOnly = v === "sale";
   if (saleOnly !== wasSale) { renderGrid(); if (!$("fdrawer").hidden) refreshDrawer(); }
   const shown = v === "sale" ? "katalog" : v; const navKey = v;
   if (isPage) renderPage(v);
   if (v === "lokasi") renderLoc();
-  $("vKat").hidden = shown !== "katalog"; $("vLoc").hidden = shown !== "lokasi"; $("vContact").hidden = shown !== "kontak"; $("vPage").hidden = !isPage;
-  const ids = { katalog:"navKat", lokasi:"navLoc", kontak:"navContact" };
+  if (v === "masuk") window.authReset();
+  if (v === "admin") renderAdmin();
+  $("vKat").hidden = shown !== "katalog"; $("vLoc").hidden = shown !== "lokasi"; $("vContact").hidden = shown !== "kontak"; $("vPage").hidden = !isPage; $("vAuth").hidden = shown !== "masuk"; $("vAdmin").hidden = shown !== "admin";
+  const ids = { katalog:"navKat", lokasi:"navLoc", kontak:"navContact", masuk:"navAuth" };
   Object.keys(ids).forEach((k) => { const a = $(ids[k]); if (k === v || (k === "katalog" && v === "sale")) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   [["navAll", v === "katalog"], ["navSale", v === "sale"]].forEach(([id, on]) => { if (on) $(id).setAttribute("aria-current", "page"); else $(id).removeAttribute("aria-current"); });
   if ($("dd").contains(document.activeElement)) document.activeElement.blur();
   $("dd").classList.add("shut"); $("dd").classList.remove("open"); $("burger").setAttribute("aria-expanded", "false");
-  document.title = isPage ? "G-GANO " + PAGES[v].t : { katalog:"G-GANO Semua Produk", sale:"G-GANO Sale", lokasi:"G-GANO Location", kontak:"G-GANO Contact" }[v];
+  document.title = isPage ? "G-GANO " + PAGES[v].t : { katalog:"G-GANO Semua Produk", sale:"G-GANO Sale", lokasi:"G-GANO Location", kontak:"G-GANO Contact", masuk:"G-GANO Akun", admin:"G-GANO Admin" }[v];
   if (push) { try { history.replaceState(null, "", "#" + v); } catch (e) {} }
-  $("katTitle").textContent = saleOnly ? "Sale" : "Kaos pria casual";
+  $("katTitle").textContent = saleOnly ? "Sale" : "Casual T-shirt Collection";
   window.scrollTo(0, 0);
   const h = document.querySelector(".top"); if (h) document.documentElement.style.setProperty("--navh", h.offsetHeight + "px");
 }
 document.addEventListener("click", (e) => {
-  const a = e.target.closest(".top a[href^=\"#\"], .brand, .announce a[href^=\"#\"], .ft a[href^=\"#\"], .pg a[href^=\"#\"]"); if (!a) return; e.preventDefault();
+  const a = e.target.closest(".top a[href^=\"#\"], .brand, .acct, .announce a[href^=\"#\"], .ft a[href^=\"#\"], .ftc a[href^=\"#\"], .pg a[href^=\"#\"], .au a[href^=\"#\"]"); if (!a) return; e.preventDefault();
   setView(a.getAttribute("href").slice(1), true);
 });
 $("burger").addEventListener("click", () => { const o = !$("dd").classList.contains("open"); $("dd").classList.toggle("open", o); $("burger").setAttribute("aria-expanded", String(o)); });
@@ -984,6 +1141,224 @@ window.addEventListener("resize", () => { const h = document.querySelector(".top
   box.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
   place(true); start();
 })();
+
+
+// ================= Akun pembeli (login) =================
+// PENTING: bagian ini baru TAMPILAN. Akun, kata sandi dan kode OTP harus disimpan dan dikirim oleh server,
+// bukan oleh halaman ini. Sampai AUTH.enabled diisi true dan AUTH.api disambungkan ke layanan login
+// (misalnya Supabase atau Firebase Authentication), tidak ada akun yang dibuat dan kata sandi tidak disimpan di mana pun.
+// AUTH.api(action, data) harus mengembalikan { ok:true } atau melempar error berisi pesan untuk pembeli.
+//   action "login"         data { id, password }
+//   (id = alamat email; OTP dikirim server ke email itu)
+//   action "register"      data { name, id, password }      -> server mengirim OTP
+//   action "verifyOtp"     data { purpose:"register"|"reset", id, code }
+//   action "resendOtp"     data { purpose, id }
+//   action "forgot"        data { id }                      -> server mengirim OTP
+//   action "resetPassword" data { id, code, password }
+const AUTH = {
+  enabled: false,
+  api: async () => { throw new Error("Belum tersambung ke server login."); }
+};
+(function () {
+  const forms = { login:$("fLogin"), register:$("fRegister"), otp:$("fOtp"), forgot:$("fForgot"), newpass:$("fNewpass") };
+  const NOTE_OFF = "Mode tampilan: login belum tersambung ke server, jadi belum ada akun yang dibuat dan kata sandi tidak disimpan. Semua kotak di halaman ini hanya contoh alur.";
+  let pending = { purpose:"register", id:"", idShown:"", code:"" }, timer = null;
+
+  const parseId = (raw) => {
+    const v = String(raw || "").trim();
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? { type:"email", value:v.toLowerCase() } : null;
+  };
+  const pwProblem = (p) => p.length < 8 ? "Kata sandi minimal 8 karakter." : (!/[A-Za-z]/.test(p) || !/\d/.test(p)) ? "Kata sandi harus berisi huruf dan angka." : "";
+  function setErr(id, msg) {
+    const el = document.querySelector('[data-err="' + id + '"]'), inp = $(id);
+    if (el) { el.textContent = msg || ""; el.hidden = !msg; }
+    if (inp && inp.type !== "checkbox") { if (msg) inp.setAttribute("aria-invalid", "true"); else inp.removeAttribute("aria-invalid"); }
+    return !msg;
+  }
+  const msg = (form, text, bad) => { const m = form.querySelector("[data-msg]"); m.textContent = text || ""; m.classList.toggle("bad", !!bad); };
+  const clearPw = () => document.querySelectorAll("#vAuth input[type=password]").forEach((i) => { i.value = ""; i.type = "password"; });
+
+  function show(step) {
+    Object.keys(forms).forEach((k) => { forms[k].hidden = k !== step; msg(forms[k], ""); });
+    const tabs = $("auTabs"); tabs.hidden = !(step === "login" || step === "register");
+    tabs.querySelectorAll("[data-au]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.au === step)));
+    document.querySelectorAll("#vAuth [data-err]").forEach((e) => { e.hidden = true; e.textContent = ""; });
+    document.querySelectorAll("#vAuth input[aria-invalid]").forEach((i) => i.removeAttribute("aria-invalid"));
+    document.querySelectorAll("#vAuth [data-eye]").forEach((b) => (b.textContent = "Lihat"));
+    clearPw();
+    const f = forms[step].querySelector("input"); if (f && document.activeElement !== f && !$("vAuth").hidden) f.focus({ preventScroll:true });
+  }
+  window.authReset = () => { $("auNote").textContent = AUTH.enabled ? "Masuk atau daftar untuk melihat pesanan Anda." : NOTE_OFF; $("auNote").hidden = AUTH.enabled; show("login"); };
+
+  function startTimer() {
+    clearInterval(timer); let s = 60; const b = $("otpResend"); b.disabled = true; b.textContent = "Kirim ulang kode (" + s + ")";
+    timer = setInterval(() => { s--; if (s <= 0) { clearInterval(timer); b.disabled = false; b.textContent = "Kirim ulang kode"; } else b.textContent = "Kirim ulang kode (" + s + ")"; }, 1000);
+  }
+  function toOtp(purpose, idv) {
+    pending = { purpose, id:idv.value, idShown:idv.value, code:"" };
+    show("otp"); $("otpCode").value = "";
+    $("otpSub").textContent = "Kami mengirim kode 6 angka ke email " + idv.value + ". Cek juga folder Spam. Kode berlaku beberapa menit. Jangan bagikan kode ini ke siapa pun, termasuk yang mengaku dari G-GANO.";
+    startTimer(); $("otpCode").focus({ preventScroll:true });
+  }
+  async function run(form, action, data, onOk) {
+    if (!AUTH.enabled) return false;
+    const btn = form.querySelector("button[type=submit]"); btn.disabled = true; msg(form, "Memproses...");
+    try { await AUTH.api(action, data); msg(form, ""); btn.disabled = false; onOk && onOk(); return true; }
+    catch (e) { btn.disabled = false; msg(form, (e && e.message) || "Terjadi kendala. Coba lagi.", true); return true; }
+  }
+  const offMsg = (form) => msg(form, "Login belum aktif: halaman ini belum tersambung ke server, jadi langkah ini belum bisa diproses.", true);
+
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("#vAuth [data-au]"); if (t) return show(t.dataset.au);
+    const eye = e.target.closest("[data-eye]"); if (eye) { const i = $(eye.dataset.eye); const on = i.type === "password"; i.type = on ? "text" : "password"; eye.textContent = on ? "Sembunyikan" : "Lihat"; }
+  });
+  $("rgPw").addEventListener("input", (e) => {
+    const p = e.target.value; let sc = 0;
+    if (p.length >= 8) sc++; if (p.length >= 12) sc++; if (/[a-z]/.test(p) && /[A-Z]/.test(p)) sc++; if (/\d/.test(p) && /[^A-Za-z0-9]/.test(p)) sc++;
+    $("pwBar").style.width = (p ? Math.max(1, sc) * 25 : 0) + "%"; $("pwBar").style.background = sc <= 1 ? "#b3261e" : sc === 2 ? "#c9680f" : "#14894c";
+    $("pwHint").textContent = !p ? "Minimal 8 karakter, ada huruf dan angka." : sc <= 1 ? "Masih lemah. Tambah panjang dan campur huruf besar/kecil." : sc === 2 ? "Cukup. Lebih panjang lebih aman." : "Kuat.";
+  });
+  $("otpCode").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6); });
+
+  forms.login.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = parseId($("lgId").value), pw = $("lgPw").value;
+    const a = setErr("lgId", id ? "" : "Isi email yang benar, misalnya nama@email.com.");
+    const b = setErr("lgPw", pw ? "" : "Isi kata sandi Anda.");
+    if (!a || !b) return;
+    if (!(await run(forms.login, "login", { id:id.value, password:pw }))) offMsg(forms.login);
+  });
+  forms.register.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("rgName").value.trim(), id = parseId($("rgId").value), pw = $("rgPw").value, pw2 = $("rgPw2").value;
+    const r = [
+      setErr("rgName", name.length >= 2 ? "" : "Isi nama lengkap Anda."),
+      setErr("rgId", id ? "" : "Isi email yang benar, misalnya nama@email.com."),
+      setErr("rgPw", pwProblem(pw)),
+      setErr("rgPw2", pw2 === pw ? "" : "Kata sandi tidak sama."),
+      setErr("rgOk", $("rgOk").checked ? "" : "Centang persetujuan dulu.")
+    ];
+    if (r.includes(false)) return;
+    const ran = await run(forms.register, "register", { name, id:id.value, password:pw }, () => toOtp("register", id));
+    if (!ran) toOtp("register", id);
+  });
+  forms.otp.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const code = $("otpCode").value;
+    if (!setErr("otpCode", /^\d{6}$/.test(code) ? "" : "Isi 6 angka kode OTP.")) return;
+    const ran = await run(forms.otp, "verifyOtp", { purpose:pending.purpose, id:pending.id, code }, () => {
+      if (pending.purpose === "reset") { pending.code = code; show("newpass"); } else { msg(forms.otp, "Akun Anda sudah aktif.", false); }
+    });
+    if (!ran) offMsg(forms.otp);
+  });
+  $("otpResend").addEventListener("click", async () => {
+    if (AUTH.enabled) { try { await AUTH.api("resendOtp", { purpose:pending.purpose, id:pending.id }); } catch (e) { return msg(forms.otp, (e && e.message) || "Gagal mengirim ulang.", true); } }
+    msg(forms.otp, AUTH.enabled ? "Kode baru sudah dikirim." : "Contoh tampilan: kode baru akan dikirim di sini.", false); startTimer();
+  });
+  $("otpBack").addEventListener("click", () => show(pending.purpose === "reset" ? "forgot" : "register"));
+  forms.forgot.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = parseId($("fgId").value);
+    if (!setErr("fgId", id ? "" : "Isi email yang benar, misalnya nama@email.com.")) return;
+    const ran = await run(forms.forgot, "forgot", { id:id.value }, () => toOtp("reset", id));
+    if (!ran) toOtp("reset", id);
+  });
+  forms.newpass.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const pw = $("npPw").value, pw2 = $("npPw2").value;
+    const r = [setErr("npPw", pwProblem(pw)), setErr("npPw2", pw2 === pw ? "" : "Kata sandi tidak sama.")];
+    if (r.includes(false)) return;
+    const ran = await run(forms.newpass, "resetPassword", { id:pending.id, code:pending.code, password:pw }, () => { show("login"); msg(forms.login, "Kata sandi baru tersimpan. Silakan masuk.", false); });
+    if (!ran) offMsg(forms.newpass);
+  });
+})();
+
+// ================= Pengaturan toko + Admin =================
+// Data toko (nomor WhatsApp, alamat, stok habis) disimpan di penyimpanan artifact (db).
+// Semua orang membaca, hanya pemilik/editor yang menulis (aturan akses ada di deklarasi publish).
+const STORE = { dbRef:null, stock:{} };
+const stockKey = (p) => String(skuOf(p)).replace(/[^A-Za-z0-9-]/g, "_");
+const isOut = (p) => !!STORE.stock[stockKey(p)];
+async function storeInit() {
+  try {
+    if (!window.claude || !claude.use) return;
+    const db = await claude.use("db"); if (!db) return;
+    STORE.dbRef = db;
+    db.doc("settings/store").onSnapshot((s) => {
+      const d = s.exists ? s.data() : null; if (!d) return;
+      if (typeof d.wa === "string") WA_NUMBER = d.wa.replace(/\D/g, "");
+      if (typeof d.address === "string") CONTACT.address = d.address;
+      renderContact(); if (!$("vAdmin").hidden) fillAdminForm();
+    }, () => {});
+    db.collection("stock").onSnapshot((snap) => {
+      STORE.stock = {}; snap.docs.forEach((d) => { const v = d.data(); if (v && v.out) STORE.stock[d.id] = true; });
+      renderGrid(); if (!$("vAdmin").hidden) renderStockRows();
+    }, () => {});
+  } catch (e) { /* tanpa penyimpanan: katalog tetap jalan dengan data bawaan */ }
+}
+async function adminAllowed() {
+  try {
+    if (!window.claude || !claude.use) return false;
+    const u = await claude.use("user"); if (!u) return false;
+    return !!((await u.isOwner()) || (await u.canEdit()));
+  } catch (e) { return false; }
+}
+function adminStats() {
+  const n = PRODUCTS.length, baru = PRODUCTS.filter((p) => ageOf(p) === "baru").length, habis = PRODUCTS.filter(isOut).length;
+  return [[n, "Total kaos"], [baru, "Rilis baru (90 hari)"], [n - baru, "Rilis lama"], [habis, "Ditandai habis"]];
+}
+async function renderAdmin() {
+  const box = $("adBody");
+  box.innerHTML = '<h1>Admin</h1><p>Memeriksa akses...</p>';
+  if (!(await adminAllowed())) {
+    box.innerHTML = '<h1>Admin</h1><div class="lock"><b>Halaman ini hanya untuk pemilik toko.</b><br>Untuk membukanya, buka website ini dari akun claude.ai milik pemilik (atau editor yang diundang pemilik). Pengecekan akses dilakukan oleh claude.ai, bukan oleh halaman ini, jadi tidak bisa ditembus dengan menebak kata sandi.</div>';
+    return;
+  }
+  box.innerHTML = '<h1>Admin</h1>' +
+    '<div class="stats">' + adminStats().map((s) => '<div class="stat"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>').join("") + '</div>' +
+    '<h2>Pengaturan toko</h2>' +
+    '<form id="adForm" novalidate>' +
+      '<div class="fld"><label for="adWa">Nomor WhatsApp pesanan</label><input type="tel" id="adWa" inputmode="numeric" placeholder="6281234567890"><p class="hint">Awali dengan 62 tanpa tanda + dan tanpa 0. Contoh: 6281234567890. Nomor ini dipakai tombol WhatsApp dan keranjang.</p><p class="err" data-aerr="wa" hidden></p></div>' +
+      '<div class="fld"><label for="adAddr">Alamat utama (halaman Contact)</label><textarea id="adAddr" placeholder="Jl. ..."></textarea></div>' +
+      '<button type="submit" class="btn" style="max-width:240px">Simpan pengaturan</button><p class="ok" id="adOk" role="status" hidden></p>' +
+    '</form>' +
+    '<h2>Stok kaos</h2>' +
+    '<div class="fld" style="max-width:420px"><label for="adQ">Cari kode atau nama sablon</label><input type="search" id="adQ" placeholder="contoh: 3568 atau World Wide"></div>' +
+    '<div class="tw"><table class="tbl"><thead><tr><th>Kode</th><th>Sablon</th><th>Rilis</th><th>Habis</th></tr></thead><tbody id="adRows"></tbody></table></div>' +
+    (STORE.dbRef ? '' : '<p class="au-msg bad">Penyimpanan belum tersedia di tampilan ini, jadi perubahan belum bisa disimpan.</p>');
+  fillAdminForm(); renderStockRows();
+}
+function fillAdminForm() {
+  const wa = $("adWa"), ad = $("adAddr"); if (!wa || document.activeElement === wa || document.activeElement === ad) return;
+  wa.value = WA_NUMBER || ""; ad.value = CONTACT.address || "";
+}
+function renderStockRows() {
+  const body = $("adRows"); if (!body) return;
+  const q = ($("adQ") ? $("adQ").value : "").trim().toLowerCase();
+  body.innerHTML = PRODUCTS.filter((p) => !q || (skuOf(p) + " " + title(p)).toLowerCase().includes(q)).map((p) =>
+    '<tr><td class="c">' + esc(skuOf(p)) + '</td><td>' + esc(title(p)) + '</td><td class="c">' + (p.date ? esc(dateId(p.date)) : "") + '</td>' +
+    '<td><input type="checkbox" data-stock="' + stockKey(p) + '" data-sku="' + esc(skuOf(p)) + '" aria-label="Tandai ' + esc(title(p)) + ' habis"' + (isOut(p) ? " checked" : "") + (STORE.dbRef ? "" : " disabled") + '></td></tr>'
+  ).join("") || '<tr><td colspan="4">Tidak ada yang cocok.</td></tr>';
+}
+document.addEventListener("input", (e) => { if (e.target.id === "adQ") renderStockRows(); });
+document.addEventListener("change", async (e) => {
+  const c = e.target.closest("[data-stock]"); if (!c || !STORE.dbRef) return;
+  const key = c.dataset.stock, ref = STORE.dbRef.doc("stock/" + key); c.disabled = true;
+  try { if (c.checked) await ref.set({ out:true, sku:c.dataset.sku }); else await ref.delete(); }
+  catch (err) { c.checked = !c.checked; alert("Perubahan stok ditolak. Pastikan Anda masuk sebagai pemilik atau editor."); }
+  c.disabled = false;
+});
+document.addEventListener("submit", async (e) => {
+  if (e.target.id !== "adForm") return; e.preventDefault();
+  const wa = $("adWa").value.replace(/\D/g, ""), er = document.querySelector('[data-aerr="wa"]'), ok = $("adOk");
+  const bad = wa && !/^62\d{8,13}$/.test(wa);
+  er.textContent = bad ? "Nomor harus diawali 62, contoh 6281234567890." : ""; er.hidden = !bad; ok.hidden = true; if (bad) return;
+  if (!STORE.dbRef) { ok.textContent = "Penyimpanan belum tersedia, perubahan belum tersimpan."; ok.hidden = false; return; }
+  try { await STORE.dbRef.doc("settings/store").set({ wa, address:$("adAddr").value.trim() }); ok.textContent = "Tersimpan."; }
+  catch (err) { ok.textContent = "Gagal menyimpan. Pastikan Anda masuk sebagai pemilik atau editor."; }
+  ok.hidden = false;
+});
+storeInit();
 
 if (location.hash.length > 1 && location.hash !== "#katalog") setView(location.hash.slice(1), false);
 else { const h = document.querySelector(".top"); if (h) document.documentElement.style.setProperty("--navh", h.offsetHeight + "px"); }
