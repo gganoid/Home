@@ -26,6 +26,24 @@ button{font:inherit;color:inherit;cursor:pointer}
 .chat{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:var(--wa-ink);text-decoration:none;font-weight:700;padding:10px 16px;border-radius:999px;font-size:14px;white-space:nowrap}
 .chat svg{width:18px;height:18px;flex:none}
 
+.hero{margin-top:16px}
+.hero-view{position:relative;aspect-ratio:1254/706;overflow:hidden;background:#d9d3cb}
+.hero-slide{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;background:none;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.hero-slide.is-on{opacity:1;visibility:visible;z-index:1;transition:opacity .6s ease}
+.hero-slide img{display:block;width:100%;height:100%;object-fit:cover}
+.hero-nav{position:absolute;top:50%;z-index:2;transform:translateY(-50%);width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.88);color:var(--ink);cursor:pointer;opacity:.9}
+.hero-nav:hover,.hero-nav:focus-visible{opacity:1;background:#fff}
+.hero-nav.prev{left:10px}.hero-nav.next{right:10px}
+.hero-dots{display:flex;justify-content:center;gap:4px;margin-top:6px}
+.hero-dot{width:30px;height:24px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.hero-dot::before{content:"";width:22px;height:3px;background:var(--line);transition:background .2s,width .2s}
+.hero-dot[aria-current="true"]::before{background:var(--ink);width:30px}
+.hero-slide:focus-visible,.hero-dot:focus-visible,.hero-nav:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
+@media (max-width:720px){.hero{margin-top:10px}.hero-nav{display:none}}
+@media (prefers-reduced-motion:reduce){.hero-slide,.hero-slide.is-on{transition:none}}
+.shopee-strip{display:block;margin-top:10px;background:#d9d3cb}
+.shopee-strip img{display:block;width:100%;height:auto}
+.shopee-strip:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
 .intro{padding-block:36px 24px;display:grid;gap:10px}
 .intro h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,8vw,68px);line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin:0;text-wrap:balance}
 .intro p{margin:0;color:var(--muted);max-width:52ch}
@@ -413,6 +431,19 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
   </header>
 
   <div id="vKat">
+  <section class="hero" id="hero" role="region" aria-roledescription="carousel" aria-label="Banner promosi">
+    <div class="hero-view" id="heroView">
+      <button type="button" class="hero-slide is-on" aria-roledescription="slide" aria-label="1 dari 3: Essential Tee, lihat koleksi"><img src="img/banner-1.jpg" width="1254" height="706" alt="G-GANO Essential Tee, kaos basic berbahan lembut dan ringan dalam empat warna"></button>
+      <button type="button" class="hero-slide" aria-roledescription="slide" aria-label="2 dari 3: Graphic Collection, lihat koleksi"><img src="img/banner-2.jpg" width="1254" height="706" alt="G-GANO Graphic Collection, kaos grafis katun combed 24s" loading="lazy"></button>
+      <button type="button" class="hero-slide" aria-roledescription="slide" aria-label="3 dari 3: Casual Graphic T-shirt, mulai dari Rp55.900, lihat koleksi"><img src="img/banner-3.jpg" width="1254" height="706" alt="G-GANO Casual Graphic T-shirt putih, mulai dari Rp55.900" loading="lazy"></button>
+      <button type="button" class="hero-nav prev" id="heroPrev" aria-label="Banner sebelumnya"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+      <button type="button" class="hero-nav next" id="heroNext" aria-label="Banner berikutnya"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+    </div>
+    <div class="hero-dots" id="heroDots" role="group" aria-label="Pilih banner"></div>
+  </section>
+
+  <a class="shopee-strip" href="https://shopee.co.id/ggano.id" target="_blank" rel="noopener" aria-label="G-GANO tersedia di Shopee, beli sekarang (buka di tab baru)"><img src="img/banner-shopee.jpg" width="1629" height="543" alt="G-GANO tersedia di Shopee. Beli sekarang" loading="lazy"></a>
+
   <section class="intro">
     <div class="stripe"></div>
     <h1 id="katTitle">Casual T-shirt Collection</h1>
@@ -591,9 +622,9 @@ const waLink = (text) => "https://wa.me/" + (WA_NUMBER || "") + "?text=" + encod
 // Every product has variants (one per color). Single-color shirts get one variant.
 // Promo prices per code: "was" = Harga konsi (coret), "price" = Harga jual online. Persen diskon dihitung otomatis.
 const PROMO = {
-  "GO 4328.6": { was:229800, price:97900 }, "GO 4329.6": { was:229800, price:97900 },
-  "GO 2340.5": { was:229800, price:97900 }, "GO 2347.5": { was:229800, price:97900 },
-  "GO 360.6":  { was:189800, price:79900 }, "GO 3586.1": { was:199800, price:89900 }, "GO 2641.1": { was:159800, price:74900 }
+  "GO 4328.6": { was:229800, price:80400 }, "GO 4329.6": { was:229800, price:80400 },
+  "GO 2340.5": { was:229800, price:80400 }, "GO 2347.5": { was:229800, price:80400 },
+  "GO 360.6":  { was:189800, price:66400 }, "GO 3586.1": { was:199800, price:69900 }, "GO 2641.1": { was:159800, price:55900 }
 };
 const SKU = {"GO 4328.6|Make Today Amazing": ["GO 4328.6-3561", "2026-08-23"], "GO 4328.6|Follow Your Passion": ["GO 4328.6-3562", "2026-08-23"], "GO 4328.6|California Locals Only": ["GO 4328.6-3563", "2026-08-23"], "GO 4328.6|Nothing Impossible": ["GO 4328.6-3564", "2026-08-23"], "GO 4328.6|Never Give Up": ["GO 4328.6-3565", "2026-08-23"], "GO 4328.6|Core Denim New York City": ["GO 4328.6-3566", "2026-08-23"], "GO 4329.6|Apparel Original Concept": ["GO 4329.6-3567", "2026-09-07"], "GO 4329.6|World Wide": ["GO 4329.6-3568", "2026-09-07"], "GO 4329.6|Positive and Focused": ["GO 4329.6-3569", "2026-09-07"], "GO 4329.6|01 Denim Outfitters": ["GO 4329.6-3570", "2026-09-07"], "GO 4329.6|This Moment Is Your Life": ["GO 4329.6-3571", "2026-09-07"], "GO 4329.6|Original Street Wear": ["GO 4329.6-3572", "2026-09-07"], "GO 2340.5|Brooklyn Time Explains Everything": ["GO 2340.5-3536", "2025-11-11"], "GO 2340.5|Have A Nice Day": ["GO 2340.5-3537", "2025-11-11"], "GO 2340.5|Freestyle": ["GO 2340.5-3538", "2025-11-11"], "GO 2340.5|You Can Do It Now": ["GO 2340.5-3539", "2025-11-11"], "GO 2340.5|Stay Humble": ["GO 2340.5-3540", "2025-11-11"], "GO 2340.5|California Core": ["GO 2340.5-3541", "2025-11-11"], "GO 2340.5|We Are The Ones": ["GO 2340.5-3542", "2025-11-11"], "GO 2347.5|Spirit": ["GO 2347.5-3511", "2025-07-18"], "GO 2347.5|Think Different 097": ["GO 2347.5-3512", "2025-07-18"], "GO 2347.5|Great Things NYC Style": ["GO 2347.5-3513", "2025-07-18"], "GO 2347.5|Brooklyn Varsity": ["GO 2347.5-3514", "2025-07-18"], "GO 2347.5|California Five Boroughs": ["GO 2347.5-3515", "2025-07-18"], "GO 3586.1|1967 Sport House": ["GO 3586.1-3503", "2025-06-28"], "GO 3586.1|Outside The Box": ["GO 3586.1-3504", "2025-06-28"], "GO 3586.1|NYC 89 Sports": ["GO 3586.1-3505", "2025-06-28"], "GO 3586.1|Be Yourself Now": ["GO 3586.1-3506", "2025-06-28"], "GO 3586.1|Move On": ["GO 3586.1-3507", "2025-06-28"], "GO 3586.1|Brooklyn New York": ["GO 3586.1-3508", "2025-06-28"], "GO 2641.1|Not Perfect But Cool": ["GO 2641.1-1189", "2025-06-21"], "GO 2641.1|89 New Generation": ["GO 2641.1-1190", "2025-06-21"], "GO 2641.1|Ottawa Jazz Festival": ["GO 2641.1-1191", "2025-06-21"], "GO 2641.1|We Go Up": ["GO 2641.1-1192", "2025-06-21"], "GO 2641.1|Never Give Up": ["GO 2641.1-1193", "2025-06-21"], "GO 2641.1|NYC Urban Brand": ["GO 2641.1-1194", "2025-06-21"], "GO 360.6|Oversized Basic": ["GO 360.6", "2026-10-23"]};
 PRODUCTS.forEach((p) => { const k = SKU[p.code + "|" + p.design]; if (k) { p.sku = k[0]; p.date = k[1]; } });
@@ -1370,6 +1401,39 @@ renderContact(); renderFooter();
 renderFilters();
 renderGrid();
 refreshCartBadge();
+
+// ---- Hero banner (3 slides, auto-advance, swipe, dots)
+(function () {
+  const view = $("heroView"); if (!view) return;
+  const slides = [...view.querySelectorAll(".hero-slide")], dotsBox = $("heroDots"), n = slides.length;
+  let cur = 0, timer = null;
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  dotsBox.innerHTML = slides.map((_, i) => '<button type="button" class="hero-dot" aria-label="Banner ' + (i + 1) + '"></button>').join("");
+  const dots = [...dotsBox.children];
+  function show(i) {
+    cur = (i + n) % n;
+    slides.forEach((s, k) => { s.classList.toggle("is-on", k === cur); s.tabIndex = k === cur ? 0 : -1; s.setAttribute("aria-hidden", k === cur ? "false" : "true"); });
+    dots.forEach((d, k) => d.setAttribute("aria-current", k === cur ? "true" : "false"));
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function play() { stop(); if (!reduce) timer = setInterval(() => { if (!document.hidden) show(cur + 1); }, 6000); }
+  $("heroPrev").addEventListener("click", () => { show(cur - 1); play(); });
+  $("heroNext").addEventListener("click", () => { show(cur + 1); play(); });
+  dots.forEach((d, k) => d.addEventListener("click", () => { show(k); play(); }));
+  slides.forEach((s) => s.addEventListener("click", () => {
+    const g = $("grid"); if (g) g.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }));
+  const hero = $("hero");
+  hero.addEventListener("mouseenter", stop); hero.addEventListener("mouseleave", play);
+  hero.addEventListener("focusin", stop); hero.addEventListener("focusout", play);
+  let x0 = null;
+  view.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+  view.addEventListener("touchend", (e) => {
+    if (x0 !== null) { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1)); }
+    x0 = null; play();
+  });
+  show(0); play();
+})();
 </script>
 
 </body></html>
