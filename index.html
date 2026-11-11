@@ -41,6 +41,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 .hero-slide:focus-visible,.hero-dot:focus-visible,.hero-nav:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
 @media (max-width:720px){.hero{margin-top:10px}.hero-nav{display:none}}
 @media (prefers-reduced-motion:reduce){.hero-slide,.hero-slide.is-on{transition:none}}
+.promo-grid{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:4px}
+.promo-tile{flex:0 0 auto;width:170px;display:block;padding:0;border:0;background:#d9d3cb;cursor:pointer;overflow:hidden;aspect-ratio:1;scroll-snap-align:start}
+.promo-tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.promo-tile:hover img{transform:scale(1.04)}
+.promo-tile:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
+@media (max-width:720px){.promo-grid{gap:6px;margin-top:6px}.promo-tile{width:128px}}
+@media (prefers-reduced-motion:reduce){.promo-tile img{transition:none}}
+.card-flash{outline:3px solid var(--ink);outline-offset:3px}
 .shopee-strip{display:block;margin-top:10px;background:#d9d3cb}
 .shopee-strip img{display:block;width:100%;height:auto}
 .shopee-strip:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
@@ -139,6 +147,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 :root{--disc:#c0350a}
 .order{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:var(--wa-ink);text-decoration:none;font-weight:700;font-size:14px;padding:10px 12px;border-radius:8px}
 .order svg{width:16px;height:16px;flex:none}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.order.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.order.alt:hover{background:var(--ink);color:#fff}
+.sheet .order.alt{margin-top:8px}
 .info .price{margin-bottom:0;font-size:13px}
 .dots{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
 .dot{width:26px;height:26px;padding:3px;border-radius:50%;border:2px solid transparent;background:none;display:grid;place-items:center}
@@ -424,13 +436,13 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
   </div>
 </div>
 <div class="wrap">
-  <div class="brandrow"><a class="brand" href="#katalog" id="navLogo" aria-label="G-GANO, ke katalog">G-GANO</a><a href="#masuk" id="navAuth" class="acct" aria-label="Masuk atau daftar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div>
+  <div class="brandrow"><a class="brand" href="#beranda" id="navLogo" aria-label="G-GANO, ke beranda">G-GANO</a><a href="#masuk" id="navAuth" class="acct" aria-label="Masuk atau daftar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div>
   <header class="top">
-    <nav class="nl nav-main" aria-label="Menu utama"><div class="dd" id="dd"><button type="button" class="tl burger" id="burger" aria-label="Menu katalog" aria-expanded="false" aria-controls="ddm"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="#katalog" id="navKat" aria-current="page" aria-haspopup="true">Katalog</a><div class="ddm" id="ddm"><a href="#katalog" id="navAll">Semua Produk</a><a href="#sale" id="navSale">Sale</a></div></div></nav>
+    <nav class="nl nav-main" aria-label="Menu utama"><div class="dd" id="dd"><button type="button" class="tl burger" id="burger" aria-label="Menu katalog" aria-expanded="false" aria-controls="ddm"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="#katalog" id="navKat" aria-haspopup="true">Katalog</a><div class="ddm" id="ddm"><a href="#katalog" id="navAll">Semua Produk</a><a href="#sale" id="navSale">Sale</a></div></div></nav>
     <div class="nr"><a href="#lokasi" id="navLoc">Location</a><a href="#kontak" id="navContact">Contact</a><button type="button" class="tl" id="cartBtn" aria-label="Buka keranjang">Keranjang (<span id="cartCount">0</span>)</button></div>
   </header>
 
-  <div id="vKat">
+  <div id="vHome">
   <section class="hero" id="hero" role="region" aria-roledescription="carousel" aria-label="Banner promosi">
     <div class="hero-view" id="heroView">
       <button type="button" class="hero-slide is-on" aria-roledescription="slide" aria-label="1 dari 3: Essential Tee, lihat koleksi"><img src="img/banner-1.jpg" width="1254" height="706" alt="G-GANO Essential Tee, kaos basic berbahan lembut dan ringan dalam empat warna"></button>
@@ -442,7 +454,20 @@ button.order:disabled{opacity:.45;cursor:not-allowed}
     <div class="hero-dots" id="heroDots" role="group" aria-label="Pilih banner"></div>
   </section>
 
+  <section class="promo-grid" id="promoGrid" aria-label="Kaos graphic pilihan">
+    <button type="button" class="promo-tile" data-sku="GO 3586.1-3503" aria-label="Lihat GO 3586.1-3503, 1967 Sport House"><img src="img/banner-GO 3586.1-3503.jpg" width="941" height="941" alt="G-GANO T-shirt Graphic 1967 Sport House, combed 24s" loading="lazy"></button>
+    <button type="button" class="promo-tile" data-sku="GO 3586.1-3504" aria-label="Lihat GO 3586.1-3504, Outside The Box"><img src="img/banner-GO 3586.1-3504.jpg" width="941" height="941" alt="G-GANO T-shirt Graphic Outside The Box, combed 24s" loading="lazy"></button>
+    <button type="button" class="promo-tile" data-sku="GO 3586.1-3505" aria-label="Lihat GO 3586.1-3505, NYC 89 Sports"><img src="img/banner-GO 3586.1-3505.jpg" width="941" height="941" alt="G-GANO T-shirt Graphic NYC 89 Sports, combed 24s" loading="lazy"></button>
+    <button type="button" class="promo-tile" data-sku="GO 3586.1-3506" aria-label="Lihat GO 3586.1-3506, Be Yourself Now"><img src="img/banner-GO 3586.1-3506.jpg" width="941" height="941" alt="G-GANO T-shirt Graphic Be Yourself Now, combed 24s" loading="lazy"></button>
+    <button type="button" class="promo-tile" data-sku="GO 3586.1-3507" aria-label="Lihat GO 3586.1-3507, Move On"><img src="img/banner-GO 3586.1-3507.jpg" width="941" height="941" alt="G-GANO T-shirt Graphic Move On, combed 24s" loading="lazy"></button>
+    <button type="button" class="promo-tile" data-sku="GO 3586.1-3508" aria-label="Lihat GO 3586.1-3508, Brooklyn New York"><img src="img/banner-GO 3586.1-3508.jpg" width="941" height="941" alt="G-GANO T-shirt Graphic Brooklyn New York, combed 24s" loading="lazy"></button>
+  </section>
+
   <a class="shopee-strip" href="https://shopee.co.id/ggano.id" target="_blank" rel="noopener" aria-label="G-GANO tersedia di Shopee, beli sekarang (buka di tab baru)"><img src="img/banner-shopee.jpg" width="1629" height="543" alt="G-GANO tersedia di Shopee. Beli sekarang" loading="lazy"></a>
+  </div>
+
+  <div id="vKat" hidden>
+
 
   <section class="intro">
     <div class="stripe"></div>
@@ -612,6 +637,13 @@ const COLORS = { Black:"#15161a", Orange:"#c9680f", Charcoal:"#4a4c5a", Maroon:"
 /* ===================== */
 
 const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.93 9.93 0 0 0-8.5 15.07L2 22l5.07-1.5A9.94 9.94 0 1 0 12.04 2Zm5.8 14.1c-.25.7-1.46 1.34-2 1.4-.52.06-1.18.08-1.9-.12a17 17 0 0 1-1.72-.64c-3.03-1.31-5-4.37-5.16-4.57-.15-.2-1.23-1.64-1.23-3.12 0-1.49.78-2.22 1.06-2.52.27-.3.6-.38.8-.38l.57.01c.19 0 .43-.07.67.5.25.6.84 2.08.92 2.23.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.18.3.78 1.28 1.67 2.07 1.14 1.02 2.1 1.34 2.4 1.49.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.08.12.08.72-.17 1.42Z"/></svg>';
+// Shopee product links, per full code (add more lines here as links become available).
+const SHOPEE = {
+  "GO 3586.1-3503": "https://id.shp.ee/87vhVto5", "GO 3586.1-3504": "https://id.shp.ee/7XuV6Uew",
+  "GO 3586.1-3505": "https://id.shp.ee/MH3pr7So", "GO 3586.1-3506": "https://id.shp.ee/4zZ86kGc",
+  "GO 3586.1-3507": "https://id.shp.ee/A7CRhiq6", "GO 3586.1-3508": "https://id.shp.ee/p71VaG7Y"
+};
+const BAG_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5h14l-1 12.5H6L5 7.5Z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>';
 const CART_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.76L20 8H6.2"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -780,6 +812,7 @@ function renderSheet() {
         '<div class="qty"><button type="button" data-q="-1" aria-label="Kurangi jumlah">&minus;</button><output id="qtyOut">' + qty + '</output><button type="button" data-q="1" aria-label="Tambah jumlah">+</button></div>' +
         '<button type="button" class="order" data-add' + (selectedSize && !isOut(p) ? '' : ' disabled') + '>' + CART_ICON + 'Tambah ke keranjang</button>' +
         '<p class="hint">' + (isOut(p) ? 'Stok kaos ini sedang habis.' : selectedSize ? 'Ukuran ' + selectedSize + ', ' + qty + ' pcs.' : 'Pilih ukuran dulu untuk menambahkan ke keranjang.') + '</p>' +
+        (SHOPEE[skuOf(p)] ? '<a class="order alt" href="' + SHOPEE[skuOf(p)] + '" target="_blank" rel="noopener">' + BAG_ICON + 'Beli di Shopee<span class="vh"> (buka di tab baru)</span></a>' : '') +
       '</div>' +
     '</div>';
 }
@@ -1102,7 +1135,7 @@ function renderPage(k) { $("pgBody").innerHTML = '<h1>' + PAGES[k].t + '</h1>' +
 
 function setView(v, push) {
   const isPage = Object.prototype.hasOwnProperty.call(PAGES, v);
-  if (v !== "lokasi" && v !== "kontak" && v !== "sale" && v !== "masuk" && v !== "admin" && !isPage) v = "katalog";
+  if (v !== "lokasi" && v !== "kontak" && v !== "sale" && v !== "masuk" && v !== "admin" && v !== "katalog" && !isPage) v = "beranda";
   const wasSale = saleOnly; saleOnly = v === "sale";
   if (saleOnly !== wasSale) { renderGrid(); if (!$("fdrawer").hidden) refreshDrawer(); }
   const shown = v === "sale" ? "katalog" : v; const navKey = v;
@@ -1110,13 +1143,13 @@ function setView(v, push) {
   if (v === "lokasi") renderLoc();
   if (v === "masuk") window.authReset();
   if (v === "admin") renderAdmin();
-  $("vKat").hidden = shown !== "katalog"; $("vLoc").hidden = shown !== "lokasi"; $("vContact").hidden = shown !== "kontak"; $("vPage").hidden = !isPage; $("vAuth").hidden = shown !== "masuk"; $("vAdmin").hidden = shown !== "admin";
+  $("vHome").hidden = shown !== "beranda"; $("vKat").hidden = shown !== "katalog"; $("vLoc").hidden = shown !== "lokasi"; $("vContact").hidden = shown !== "kontak"; $("vPage").hidden = !isPage; $("vAuth").hidden = shown !== "masuk"; $("vAdmin").hidden = shown !== "admin";
   const ids = { katalog:"navKat", lokasi:"navLoc", kontak:"navContact", masuk:"navAuth" };
   Object.keys(ids).forEach((k) => { const a = $(ids[k]); if (k === v || (k === "katalog" && v === "sale")) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   [["navAll", v === "katalog"], ["navSale", v === "sale"]].forEach(([id, on]) => { if (on) $(id).setAttribute("aria-current", "page"); else $(id).removeAttribute("aria-current"); });
   if ($("dd").contains(document.activeElement)) document.activeElement.blur();
   $("dd").classList.add("shut"); $("dd").classList.remove("open"); $("burger").setAttribute("aria-expanded", "false");
-  document.title = isPage ? "G-GANO " + PAGES[v].t : { katalog:"G-GANO Semua Produk", sale:"G-GANO Sale", lokasi:"G-GANO Location", kontak:"G-GANO Contact", masuk:"G-GANO Akun", admin:"G-GANO Admin" }[v];
+  document.title = isPage ? "G-GANO " + PAGES[v].t : { beranda:"G-GANO", katalog:"G-GANO Semua Produk", sale:"G-GANO Sale", lokasi:"G-GANO Location", kontak:"G-GANO Contact", masuk:"G-GANO Akun", admin:"G-GANO Admin" }[v];
   if (push) { try { history.replaceState(null, "", "#" + v); } catch (e) {} }
   $("katTitle").textContent = saleOnly ? "Sale" : "Casual T-shirt Collection";
   window.scrollTo(0, 0);
@@ -1393,14 +1426,25 @@ document.addEventListener("submit", async (e) => {
 });
 storeInit();
 
-if (location.hash.length > 1 && location.hash !== "#katalog") setView(location.hash.slice(1), false);
-else { const h = document.querySelector(".top"); if (h) document.documentElement.style.setProperty("--navh", h.offsetHeight + "px"); }
+setView(location.hash.slice(1), false);
 
 const hello = "Halo G-GANO, saya mau tanya koleksi kaos pria.";
 renderContact(); renderFooter();
 renderFilters();
 renderGrid();
 refreshCartBadge();
+
+// ---- Product banners on the home page: go to the catalog and show that shirt's card
+$("promoGrid").addEventListener("click", (e) => {
+  const t = e.target.closest(".promo-tile"); if (!t) return;
+  setView("katalog", true);
+  const i = list.findIndex((p) => skuOf(p) === t.dataset.sku);
+  const card = i >= 0 ? document.querySelector('[data-card="' + i + '"]') : null;
+  if (!card) return;
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  card.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+  card.classList.add("card-flash"); setTimeout(() => card.classList.remove("card-flash"), 2200);
+});
 
 // ---- Hero banner (3 slides, auto-advance, swipe, dots)
 (function () {
@@ -1416,12 +1460,12 @@ refreshCartBadge();
     dots.forEach((d, k) => d.setAttribute("aria-current", k === cur ? "true" : "false"));
   }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  function play() { stop(); if (!reduce) timer = setInterval(() => { if (!document.hidden) show(cur + 1); }, 6000); }
+  function play() { stop(); if (!reduce) timer = setInterval(() => { if (!document.hidden && !$("vHome").hidden) show(cur + 1); }, 6000); }
   $("heroPrev").addEventListener("click", () => { show(cur - 1); play(); });
   $("heroNext").addEventListener("click", () => { show(cur + 1); play(); });
   dots.forEach((d, k) => d.addEventListener("click", () => { show(k); play(); }));
   slides.forEach((s) => s.addEventListener("click", () => {
-    const g = $("grid"); if (g) g.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    setView("katalog", true);
   }));
   const hero = $("hero");
   hero.addEventListener("mouseenter", stop); hero.addEventListener("mouseleave", play);
